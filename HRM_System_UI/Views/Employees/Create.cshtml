@@ -81,7 +81,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DepartamentId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select asp-for="Title" asp-items="ViewBag.Depts" class="control-label col-md-4" id="selectDepts">
+                <select asp-for="Title" asp-items="ViewBag.Depts" name="DepartamentId" type="number" class="control-label col-md-4" id="selectDepts">
                     @foreach (var dept in ViewBag.Depts as IEnumerable<HRM_System_Bll.Models.DepartamentBll>)
                     {
                         <option value="@dept.Id">@dept.Title</option>
@@ -94,7 +94,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.JobId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select asp-for="Title" asp-items="ViewBag.Jobs" class="control-label col-md-4" id="selectJobs">
+                <select asp-for="Title" name="JobId" asp-items="ViewBag.Jobs" class="control-label col-md-4" id="selectJobs">
                     @foreach (var job in ViewBag.Jobs as IEnumerable<HRM_System_Bll.Models.JobBll>)
                     {
                         <option value="@job.Id">@job.Title</option>

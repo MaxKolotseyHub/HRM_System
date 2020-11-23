@@ -29,7 +29,7 @@ namespace HRM_System_Bll.Services
             if (dept == null)
                 throw new KeyNotFoundException($"Не найден отдел с идентификационным номером {departamentId}");
 
-            var job = _db.Jobs.AsNoTracking().FirstOrDefault(x => x.Id == jobId);
+            var job = _db.Jobs.FirstOrDefault(x => x.Id == jobId);
             if (job == null)
                 throw new KeyNotFoundException($"Не найдена должность с идентификационным номером {jobId}");
 
@@ -45,6 +45,8 @@ namespace HRM_System_Bll.Services
                 Employee = model,
                 EmployeeId = model.Id
             };
+
+            model.JobHistory.Add(jobHistory);
 
             await _db.SaveChangesAsync();
         }
@@ -122,6 +124,14 @@ namespace HRM_System_Bll.Services
         public IEnumerable<EmployeeBll> GetAll()
         {
             return _mapper.Map<IEnumerable<EmployeeBll>>(_db.Employees.ToList());
+        }
+
+        public EmployeeBll GetById(int id)
+        {
+            var emp = _db.Employees.FirstOrDefault(x => x.Id == id);
+            if (emp == null)
+                throw new KeyNotFoundException($"Не найден сотрудник с идентификационным номером {id}");
+            return _mapper.Map<EmployeeBll>(emp);
         }
     }
 }

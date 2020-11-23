@@ -33,18 +33,7 @@ namespace HRM_System_UI.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            //var emp = new EmployeeBll() {
-            //    FirstName = "Максим",
-            //    SecondName = "Колоцей",
-            //    ThirdName = "Александрович",
-            //    Email = "kolotseymax@gmail.com",
-            //    Fired = false,
-            //    HireDate = new DateTime(2020, 11, 12),
-            //    PhoneNumber = "+375259630794",
-            //    Salary = 2750
-            //};
-            //await _service.Add(emp);
-            return View(_service.GetAll());
+            return View(_mapper.Map<IEnumerable<IndexEmployeeViewModel>>(_service.GetAll()));
         }
 
         [HttpGet]

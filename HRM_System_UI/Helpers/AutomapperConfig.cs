@@ -17,6 +17,16 @@ namespace HRM_System_UI.Helpers
             {
                 var config = new MapperConfiguration(cfg => {
                     cfg.CreateMap<CreateEmployeeViewModel, EmployeeBll>().ReverseMap();
+                    cfg.CreateMap<EmployeeBll, IndexEmployeeViewModel>()
+                    .ForMember(
+                        d=>d.FullName, 
+                        opt=>opt.MapFrom(x=>$"{x.SecondName} {x.FirstName} {x.ThirdName}"))
+                    .ForMember(
+                        d=>d.DepartamentTitle,
+                        opt=>opt.MapFrom(x=>x.JobHistory.OrderByDescending(o=>o.Id).FirstOrDefault().Departament.Title ?? "Уволен"))
+                    .ForMember(
+                        d=>d.JobTitle,
+                        opt=>opt.MapFrom(x=>x.JobHistory.OrderByDescending(o=>o.Id).FirstOrDefault().Job.Title ?? "Неизвестно"));
                 });
 
                 _mapper = new Mapper(config);

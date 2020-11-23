@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HRM_System_Dal.DbContexts
 {
-    internal class MyContextInitializer: DropCreateDatabaseAlways<MyDbContext>
+    internal class MyContextInitializer: DropCreateDatabaseIfModelChanges<MyDbContext>
     {
         protected override void Seed(MyDbContext context)
         {
