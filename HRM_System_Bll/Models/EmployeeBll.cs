@@ -20,5 +20,6 @@ namespace HRM_System_Bll.Models
         public int ManagerId { get; set; }
         public virtual List<JobHistoryBll> JobHistory { get; set; }
         public bool Fired { get; set; } = false;
+        public DateTime? Birthday { get; set; }
     }
 }

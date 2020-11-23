@@ -1,0 +1,141 @@
+﻿@model HRM_System_UI.Models.Employee.CreateEmployeeViewModel
+
+@{
+    ViewBag.Title = "Новый сотрудник";
+}
+
+<h2>Новый сотрудник</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SecondName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SecondName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SecondName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ThirdName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ThirdName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ThirdName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Salary, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Salary, new { htmlAttributes = new { @class = "form-control", @id="salaryEditor" } })
+                @Html.ValidationMessageFor(model => model.Salary, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HireDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HireDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HireDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DepartamentId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select asp-for="Title" asp-items="ViewBag.Depts" class="control-label col-md-4" id="selectDepts">
+                    @foreach (var dept in ViewBag.Depts as IEnumerable<HRM_System_Bll.Models.DepartamentBll>)
+                    {
+                        <option value="@dept.Id">@dept.Title</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.DepartamentId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.JobId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select asp-for="Title" asp-items="ViewBag.Jobs" class="control-label col-md-4" id="selectJobs">
+                    @foreach (var job in ViewBag.Jobs as IEnumerable<HRM_System_Bll.Models.JobBll>)
+                    {
+                        <option value="@job.Id">@job.Title</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.JobId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Назад", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        const jobs = @Html.Raw(Json.Encode(ViewBag.Jobs));
+        const selectJobs = document.getElementById("selectJobs");
+        const salaryEditor = document.getElementById("salaryEditor");
+        const defaultJob = jobs.find(x => x.Id == selectJobs.value);
+
+        setSalaryLimits(defaultJob);
+
+        selectJobs.addEventListener('change', function () {
+            const selectedJob = jobs.find(x => x.Id == this.value);
+            setSalaryLimits(selectedJob);
+        });
+
+        function setSalaryLimits(job) {
+            salaryEditor.min = job.MinSalary;
+            salaryEditor.max = job.MaxSalary;
+            salaryEditor.placeholder = job.MinSalary + '-' + job.MaxSalary;
+        }
+    </script>
+}

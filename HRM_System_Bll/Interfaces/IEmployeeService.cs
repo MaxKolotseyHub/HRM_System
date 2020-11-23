@@ -9,7 +9,7 @@ namespace HRM_System_Bll.Interfaces
 {
     public interface IEmployeeService
     {
-        Task Add(EmployeeBll employee);
+        Task Add(EmployeeBll employee, int departamentId, int jobId, DateTime? hireDate);
         Task Fire(int id, DateTime fireDate);
         Task ChangeSalary(int id, decimal newSal);
         Task ChangeJob(int id, int newJobId, DateTime changeDate, int deptId);

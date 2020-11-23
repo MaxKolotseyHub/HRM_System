@@ -21,10 +21,31 @@ namespace HRM_System_Bll.Services
             _db = db;
             _mapper = mapper;
         }
-        public async Task Add(EmployeeBll employee)
+        public async Task Add(EmployeeBll employee, int departamentId, int jobId, DateTime? hireDate)
         {
             var model = _mapper.Map<EmployeeDal>(employee);
+
+            var dept = _db.Departaments.FirstOrDefault(x => x.Id == departamentId);
+            if (dept == null)
+                throw new KeyNotFoundException($"Не найден отдел с идентификационным номером {departamentId}");
+
+            var job = _db.Jobs.AsNoTracking().FirstOrDefault(x => x.Id == jobId);
+            if (job == null)
+                throw new KeyNotFoundException($"Не найдена должность с идентификационным номером {jobId}");
+
             _db.Employees.Add(model);
+
+            var jobHistory = new JobHistoryDal()
+            {
+                Departament = dept,
+                DepartamentId = dept.Id,
+                Job = job,
+                JobId = job.Id,
+                StartDate = hireDate,
+                Employee = model,
+                EmployeeId = model.Id
+            };
+
             await _db.SaveChangesAsync();
         }
 
@@ -43,7 +64,7 @@ namespace HRM_System_Bll.Services
                 throw new KeyNotFoundException($"Не найдена последняя должность сотрудника");
 
             var dept = _db.Departaments.FirstOrDefault(x => x.Id == deptId);
-            if (lastJob == null)
+            if (dept == null)
                 throw new KeyNotFoundException($"Не найден отдел с идентификационным номером {deptId}");
 
             lastJob.EndDate = changeDate;

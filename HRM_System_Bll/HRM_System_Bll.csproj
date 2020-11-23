@@ -58,7 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\AutomapperConfig.cs" />
+    <Compile Include="Interfaces\IDepartamentService.cs" />
     <Compile Include="Interfaces\IEmployeeService.cs" />
+    <Compile Include="Interfaces\IJobService.cs" />
     <Compile Include="Models\DepartamentBll.cs" />
     <Compile Include="Models\EmployeeBll.cs" />
     <Compile Include="Models\JobBll.cs" />
@@ -66,7 +68,9 @@
     <Compile Include="Models\VacationBll.cs" />
     <Compile Include="Modules\MyNinjectModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DepartamentService.cs" />
     <Compile Include="Services\EmployeeService.cs" />
+    <Compile Include="Services\JobService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HRM_System_Dal\HRM_System_Dal.csproj">

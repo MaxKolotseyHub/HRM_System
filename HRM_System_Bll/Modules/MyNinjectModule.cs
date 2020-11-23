@@ -17,6 +17,8 @@ namespace HRM_System_Bll.Modules
         public override void Load()
         {
             Kernel.Bind<IEmployeeService>().To<EmployeeService>();
+            Kernel.Bind<IJobService>().To<JobService>();
+            Kernel.Bind<IDepartamentService>().To<DepartamentService>();
             Kernel.Bind<MyDbContext>().ToSelf();
             Kernel.Bind<IMapper>().ToMethod( (_)=> AutomapperConfig.GetMapper());
         }

@@ -24,5 +24,6 @@ namespace HRM_System_Dal.Models
         public int ManagerId { get; set; }
         public virtual List<JobHistoryDal> JobHistory { get; set; } 
         public bool Fired { get; set; } = false;
+        public DateTime? Birthday { get; set; }
     }
 }
