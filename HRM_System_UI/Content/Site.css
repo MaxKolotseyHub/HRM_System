@@ -22,3 +22,47 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.my-flex-box {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.edit-empl-form {
+    margin: 25px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding: 25px;
+}
+
+.edit-empl-form-row {
+    width: 25%;
+    margin-top: 5px;
+}
+
+
+.edit-empl-form-span {
+    width: 100%;
+    text-transform: uppercase;
+    font: 1000;
+}
+
+.buttons-row{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    margin-bottom: 25px;
+}
+
+.button-save-changes {
+    margin-left: 50%;
+    transform: translate(-50%);
+}
+
+.button-fire {
+    margin-left: 25%;
+    transform: translate(-50%);
+}

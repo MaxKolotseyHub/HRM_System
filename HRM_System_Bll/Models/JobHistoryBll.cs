@@ -16,6 +16,7 @@ namespace HRM_System_Bll.Models
         public int JobId { get; set; }
         public virtual JobBll Job { get; set; }
         public int DepartamentId { get; set; }
+        public decimal Salary { get; set; }
         public virtual DepartamentBll Departament { get; set; }
     }
 }

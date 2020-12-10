@@ -12,7 +12,7 @@ namespace HRM_System_Bll.Interfaces
         Task Add(EmployeeBll employee, int departamentId, int jobId, DateTime? hireDate);
         Task Fire(int id, DateTime fireDate);
         Task ChangeSalary(int id, decimal newSal);
-        Task ChangeJob(int id, int newJobId, DateTime changeDate, int deptId);
+        Task ChangeJob(int id, int newJobId, DateTime changeDate, int deptId, decimal Salary);
         IEnumerable<EmployeeBll> GetAll();
         EmployeeBll GetById(int id);
     }

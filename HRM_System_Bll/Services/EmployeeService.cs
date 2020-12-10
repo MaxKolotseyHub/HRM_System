@@ -33,35 +33,33 @@ namespace HRM_System_Bll.Services
             if (job == null)
                 throw new KeyNotFoundException($"Не найдена должность с идентификационным номером {jobId}");
 
-            _db.Employees.Add(model);
-
-            var jobHistory = new JobHistoryDal()
+            var jobHistory = new JobHistoryDal
             {
-                Departament = dept,
                 DepartamentId = dept.Id,
-                Job = job,
                 JobId = job.Id,
                 StartDate = hireDate,
-                Employee = model,
-                EmployeeId = model.Id
+                EmployeeId = model.Id,
+                Salary = model.Salary
             };
 
             model.JobHistory.Add(jobHistory);
 
+            _db.Employees.Add(model);
+
             await _db.SaveChangesAsync();
         }
 
-        public async Task ChangeJob(int id, int newJobId, DateTime changeDate, int deptId)
+        public async Task ChangeJob(int id, int newJobId, DateTime changeDate, int deptId, decimal salary)
         {
             var emp = _db.Employees.FirstOrDefault(x => x.Id == id);
             if (emp == null)
                 throw new KeyNotFoundException($"Не найден клиент с идентификационным номером {id}");
 
-            var newJob = _db.Jobs.AsNoTracking().FirstOrDefault(x => x.Id == newJobId);
+            var newJob = _db.Jobs.FirstOrDefault(x => x.Id == newJobId);
             if (newJob == null)
                 throw new KeyNotFoundException($"Не найдена должность с идентификационным номером {newJobId}");
 
-            var lastJob = emp.JobHistory.FirstOrDefault(x => x.EndDate == DateTime.MinValue && x.StartDate != DateTime.MinValue);
+            var lastJob = emp.JobHistory.FirstOrDefault(x => x.EndDate == null && x.StartDate != DateTime.MinValue);
             if (lastJob == null)
                 throw new KeyNotFoundException($"Не найдена последняя должность сотрудника");
 
@@ -79,10 +77,13 @@ namespace HRM_System_Bll.Services
                 DepartamentId = dept.Id,
                 StartDate = changeDate,
                 Employee = emp,
-                EmployeeId = emp.Id
+                EmployeeId = emp.Id,
+                Salary = salary
             };
 
-            _db.JobHistories.Add(newJobHistoryInfo);
+            emp.Salary = salary;
+
+            emp.JobHistory.Add(newJobHistoryInfo);
             await _db.SaveChangesAsync();
         }
 
@@ -92,7 +93,7 @@ namespace HRM_System_Bll.Services
             if (emp == null)
                 throw new KeyNotFoundException($"Не найден клиент с идентификационным номером {id}");
 
-            var lastJob = emp.JobHistory.FirstOrDefault(x => x.EndDate == DateTime.MinValue && x.StartDate != DateTime.MinValue);
+            var lastJob = emp.JobHistory.FirstOrDefault(x => x.EndDate == null && x.StartDate != DateTime.MinValue);
             if (lastJob == null)
                 throw new KeyNotFoundException($"Не найдена последняя должность сотрудника");
 
@@ -101,9 +102,21 @@ namespace HRM_System_Bll.Services
                 throw new KeyNotFoundException($"Не найдена должность с идентификационным номером {lastJob.JobId}");
 
             if (newSal >= job.MinSalary && newSal <= job.MaxSalary)
+            {
                 emp.Salary = newSal;
-
+                lastJob.EndDate = DateTime.Now;
+                var newJob = new JobHistoryBll
+                {
+                    EmployeeId = emp.Id,
+                    JobId = job.Id,
+                    Salary = newSal,
+                    StartDate = DateTime.Now,
+                    DepartamentId = lastJob.DepartamentId,
+                };
+                emp.JobHistory.Add(_mapper.Map<JobHistoryDal>(newJob));
             await _db.SaveChangesAsync();
+            }
+
         }
 
         public async Task Fire(int id, DateTime fireDate)
@@ -112,11 +125,13 @@ namespace HRM_System_Bll.Services
             if (emp == null)
                 throw new KeyNotFoundException($"Не найден клиент с идентификационным номером {id}");
 
-            var lastJob = emp.JobHistory.FirstOrDefault(x => x.EndDate == DateTime.MinValue && x.StartDate != DateTime.MinValue);
+            var lastJob = emp.JobHistory.FirstOrDefault(x => x.EndDate == null && x.StartDate != DateTime.MinValue);
             if (lastJob == null)
                 throw new KeyNotFoundException($"Не найдена последняя должность сотрудника");
 
             lastJob.EndDate = fireDate;
+
+            emp.Fired = true;
 
             await _db.SaveChangesAsync();
         }
@@ -133,5 +148,6 @@ namespace HRM_System_Bll.Services
                 throw new KeyNotFoundException($"Не найден сотрудник с идентификационным номером {id}");
             return _mapper.Map<EmployeeBll>(emp);
         }
+
     }
 }

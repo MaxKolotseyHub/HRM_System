@@ -11,6 +11,7 @@ namespace HRM_System_Dal.Models
         public EmployeeDal()
         {
             JobHistory = new List<JobHistoryDal>();
+            VacationHistory = new List<VacationDal>();
         }
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -23,6 +24,7 @@ namespace HRM_System_Dal.Models
         public DateTime? FireDate { get; set; } 
         public int ManagerId { get; set; }
         public virtual List<JobHistoryDal> JobHistory { get; set; } 
+        public virtual List<VacationDal> VacationHistory { get; set; } 
         public bool Fired { get; set; } = false;
         public DateTime? Birthday { get; set; }
     }

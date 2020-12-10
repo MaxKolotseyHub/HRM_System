@@ -57,10 +57,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\TooManyVacationDaysException.cs" />
     <Compile Include="Helpers\AutomapperConfig.cs" />
-    <Compile Include="Interfaces\IDepartamentService.cs" />
+    <Compile Include="Interfaces\IBaseService.cs" />
     <Compile Include="Interfaces\IEmployeeService.cs" />
-    <Compile Include="Interfaces\IJobService.cs" />
+    <Compile Include="Interfaces\IVacationService.cs" />
     <Compile Include="Models\DepartamentBll.cs" />
     <Compile Include="Models\EmployeeBll.cs" />
     <Compile Include="Models\JobBll.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Services\DepartamentService.cs" />
     <Compile Include="Services\EmployeeService.cs" />
     <Compile Include="Services\JobService.cs" />
+    <Compile Include="Services\VacationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HRM_System_Dal\HRM_System_Dal.csproj">
@@ -80,6 +82,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>

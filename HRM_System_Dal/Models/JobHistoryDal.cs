@@ -16,6 +16,7 @@ namespace HRM_System_Dal.Models
         public int JobId { get; set; }
         public virtual JobDal Job { get; set; }
         public int DepartamentId { get; set; }
+        public decimal Salary { get; set; }
         public virtual DepartamentDal Departament { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using HRM_System_Bll.Models;
 using HRM_System_UI.Models.Employee;
+using HRM_System_UI.Models.JobHistory;
+using HRM_System_UI.Models.Vacation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +29,45 @@ namespace HRM_System_UI.Helpers
                     .ForMember(
                         d=>d.JobTitle,
                         opt=>opt.MapFrom(x=>x.JobHistory.OrderByDescending(o=>o.Id).FirstOrDefault().Job.Title ?? "Неизвестно"));
+                    cfg.CreateMap<EmployeeBll, EditEmployeeViewModel>()
+                    .ForMember(
+                        d => d.DepartamentId,
+                        opt => opt.MapFrom(x => x.JobHistory.OrderByDescending(o => o.Id).FirstOrDefault().Departament.Id ))
+                    .ForMember(
+                        d => d.NewDepartamentId,
+                        opt => opt.MapFrom(x => x.JobHistory.OrderByDescending(o => o.Id).FirstOrDefault().Departament.Id ))
+                    .ForMember(
+                        d => d.JobId,
+                        opt => opt.MapFrom(x => x.JobHistory.OrderByDescending(o => o.Id).FirstOrDefault().Job.Id))
+                    .ForMember(
+                        d => d.NewJobId,
+                        opt => opt.MapFrom(x => x.JobHistory.OrderByDescending(o => o.Id).FirstOrDefault().Job.Id))
+                    .ForMember(
+                        d => d.NewSalary,
+                        opt => opt.MapFrom(x => x.Salary))
+                    .ForMember(
+                        d => d.JobHistory,
+                        opt => opt.MapFrom(x => x.JobHistory));
+
+
+                    cfg.CreateMap<JobHistoryBll, EditJobHistoryViewModel>()
+                    .ForMember(
+                        d => d.StartDateDt,
+                        opt => opt.MapFrom(x => x.StartDate))
+                    .ForMember(
+                        d => d.EndDateDt,
+                        opt => opt.MapFrom(x => x.EndDate))
+                    .ForMember(
+                        d => d.JobTitle,
+                        opt => opt.MapFrom(x => x.Job.Title))
+                    .ForMember(
+                        d => d.DeptTitle,
+                        opt => opt.MapFrom(x => x.Departament.Title));
+
+                    cfg.CreateMap<VacationBll, CreateVacationViewModel>()
+                    .ForMember(
+                        d => d.EmpId,
+                        opt => opt.MapFrom(x => x.Id));
                 });
 
                 _mapper = new Mapper(config);

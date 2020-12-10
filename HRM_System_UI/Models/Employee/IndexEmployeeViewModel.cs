@@ -11,8 +11,10 @@ namespace HRM_System_UI.Models.Employee
         public int Id { get; set; }
         [Display(Name ="ФИО")]
         public string FullName { get; set; }
+        [DisplayFormat(DataFormatString = "{0:d}")]
         [Display(Name ="Нанят")]
         public DateTime HireDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:d}")]
         [Display(Name ="Дата рождения")]
         public DateTime Birthday { get; set; }
         public string Email { get; set; }
@@ -20,5 +22,7 @@ namespace HRM_System_UI.Models.Employee
         public string DepartamentTitle { get; set; }
         [Display(Name ="Должность")]
         public string JobTitle { get; set; }
+        [Display(Name ="Уволен")]
+        public bool Fired { get; set; }
     }
 }

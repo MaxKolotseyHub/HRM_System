@@ -1,0 +1,185 @@
+﻿@model HRM_System_UI.Models.Employee.EditEmployeeViewModel
+
+@{
+    ViewBag.Title = "Карьера";
+}
+
+<div class="my-flex-box">
+    <hr />
+    <canvas width="800" height="250" id="chart">
+    </canvas>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="table-bordered container" style="margin-top: 25px;">
+            <div class="edit-empl-form">
+
+                <span class="edit-empl-form-span ">Карьерные достижения</span>
+
+                <hr />
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+
+
+                @Html.LabelFor(model => model.JobId, htmlAttributes: new { @class = "control-label edit-empl-form-row" })
+                <div class="edit-empl-form-row">
+                    @Html.HiddenFor(model => model.JobId)
+                    <input type="text" name="JobId" value=@Model.JobId id="jobEditor" disabled="disabled">
+                    @Html.ValidationMessageFor(model => model.JobId, "", new { @class = "text-danger" })
+                </div>
+
+                @if (!Model.Fired)
+                {
+                    @Html.LabelFor(model => model.NewJobId, htmlAttributes: new { @class = "control-label edit-empl-form-row" })
+                    <div class="edit-empl-form-row">
+                        <select name="NewJobId" class="form-control" id="selectJobs">
+                            @foreach (var job in Model.Jobs as IEnumerable<HRM_System_Bll.Models.JobBll>)
+                            {
+                                <option value="@job.Id">@job.Title</option>
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(model => model.JobId, "", new { @class = "text-danger" })
+                    </div>
+                }
+                @Html.LabelFor(model => model.Salary, htmlAttributes: new { @class = "control-label edit-empl-form-row" })
+                <div class="edit-empl-form-row">
+                    @Html.DisplayFor(model => model.Salary, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.Salary)
+                    @Html.ValidationMessageFor(model => model.Salary, "", new { @class = "text-danger" })
+                </div>
+
+                @if (!Model.Fired)
+                {
+                    @Html.LabelFor(model => model.NewSalary, htmlAttributes: new { @class = "control-label edit-empl-form-row" })
+                    <div class="edit-empl-form-row">
+                        @Html.EditorFor(model => model.NewSalary, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NewSalary, "", new { @class = "text-danger" })
+                    </div>
+                }
+                @Html.LabelFor(model => model.DepartamentId, htmlAttributes: new { @class = "control-label edit-empl-form-row" })
+                <div class="edit-empl-form-row">
+                    @Html.HiddenFor(model => model.DepartamentId)
+                    <input type="text" name="DepartamentId" value=@Model.DepartamentId id="departamentEditor" disabled="disabled">
+                    @Html.ValidationMessageFor(model => model.DepartamentId, "", new { @class = "text-danger" })
+                </div>
+                @if (!Model.Fired)
+                {
+                    @Html.LabelFor(model => model.NewDepartamentId, htmlAttributes: new { @class = "control-label edit-empl-form-row" })
+                    <div class="edit-empl-form-row">
+                        <select name="NewDepartamentId" type="number" class="form-control" id="selectDepts">
+                            @foreach (var dept in Model.Depts as IEnumerable<HRM_System_Bll.Models.DepartamentBll>)
+                            {
+                                <option value="@dept.Id">@dept.Title</option>
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(model => model.DepartamentId, "", new { @class = "text-danger" })
+
+                    </div>
+                }
+
+            </div>
+                @if (!Model.Fired)
+                {
+                    <div class="buttons-row">
+                        <input type="submit" value="Применить изменения" class="btn btn-success button-save-changes" />
+                        <a href="/Employees/Fire/@Model.Id" class="btn btn-danger button-fire">Увольнение</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="buttons-row">
+                        <span class="button-save-changes text-danger">Уволен с @Model.JobHistory.OrderByDescending(x => x.EndDateDt).Select(x => x.EndDate).First()</span>
+                    </div>
+                }
+        </div>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Назад", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/")
+    <script src="~/Scripts/Chart.js"></script>
+
+    <script>
+        const departamentEditor = document.getElementById('departamentEditor');
+        const jobEditor = document.getElementById('jobEditor');
+        const jobs = @Html.Raw(Json.Encode(Model.Jobs));
+        const depts = @Html.Raw(Json.Encode(Model.Depts));
+        const jobHistory = @Html.Raw(Json.Encode(Model.JobHistory));
+
+        const departamentEditorDefaultValue = departamentEditor.value;
+        const jobEditorDefaultValue = jobEditor.value;
+
+        const defaultJob = jobs.find(x => x.Id == jobEditorDefaultValue).Title;
+        jobEditor.value = defaultJob;
+
+        const defaultDept = depts.find(x => x.Id == departamentEditorDefaultValue).Title;
+        departamentEditor.value = defaultDept;
+
+        window.onload = function () {
+
+            var myCanvas = document.getElementById('chart').getContext('2d');
+
+            var chart = new Chart(myCanvas, {
+                type: 'bar',
+                fill: true,
+                data: {
+                    labels: this.getChartLables(),
+                    datasets: [{
+                        label: 'Зарплата',
+                        data: this.getChartData(),
+                         backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                     ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+
+            });
+        }
+
+        function getChartData() {
+            let data = [];
+            jobHistory.forEach(function (x) {
+                data.push(x.Salary);
+            });
+            return data;
+        }
+
+        function getChartLables() {
+            let lables = [];
+            jobHistory.forEach(function (x) {
+                lables.push(x.StartDate + ' - ' + x.EndDate +'\n' + x.JobTitle);
+            })
+            return lables;
+        }
+    </script>
+}
