@@ -11,5 +11,6 @@ namespace HRM_System_Bll.Interfaces
     {
         Task StartVacation(int emplId, DateTime start, DateTime end);
         int GetAvailableDays(int id);
+        bool CheckOnVacation(DateTime date, int id);
     }
 }

@@ -17,25 +17,26 @@ namespace HRM_System_UI.Helpers
         {
             if (_mapper == null)
             {
-                var config = new MapperConfiguration(cfg => {
+                var config = new MapperConfiguration(cfg =>
+                {
                     cfg.CreateMap<CreateEmployeeViewModel, EmployeeBll>().ReverseMap();
                     cfg.CreateMap<EmployeeBll, IndexEmployeeViewModel>()
                     .ForMember(
-                        d=>d.FullName, 
-                        opt=>opt.MapFrom(x=>$"{x.SecondName} {x.FirstName} {x.ThirdName}"))
+                        d => d.FullName,
+                        opt => opt.MapFrom(x => $"{x.SecondName} {x.FirstName} {x.ThirdName}"))
                     .ForMember(
-                        d=>d.DepartamentTitle,
-                        opt=>opt.MapFrom(x=>x.JobHistory.OrderByDescending(o=>o.Id).FirstOrDefault().Departament.Title ?? "Уволен"))
+                        d => d.DepartamentTitle,
+                        opt => opt.MapFrom(x => x.JobHistory.OrderByDescending(o => o.Id).FirstOrDefault().Departament.Title ?? "Уволен"))
                     .ForMember(
-                        d=>d.JobTitle,
-                        opt=>opt.MapFrom(x=>x.JobHistory.OrderByDescending(o=>o.Id).FirstOrDefault().Job.Title ?? "Неизвестно"));
+                        d => d.JobTitle,
+                        opt => opt.MapFrom(x => x.JobHistory.OrderByDescending(o => o.Id).FirstOrDefault().Job.Title ?? "Неизвестно"));
                     cfg.CreateMap<EmployeeBll, EditEmployeeViewModel>()
                     .ForMember(
                         d => d.DepartamentId,
-                        opt => opt.MapFrom(x => x.JobHistory.OrderByDescending(o => o.Id).FirstOrDefault().Departament.Id ))
+                        opt => opt.MapFrom(x => x.JobHistory.OrderByDescending(o => o.Id).FirstOrDefault().Departament.Id))
                     .ForMember(
                         d => d.NewDepartamentId,
-                        opt => opt.MapFrom(x => x.JobHistory.OrderByDescending(o => o.Id).FirstOrDefault().Departament.Id ))
+                        opt => opt.MapFrom(x => x.JobHistory.OrderByDescending(o => o.Id).FirstOrDefault().Departament.Id))
                     .ForMember(
                         d => d.JobId,
                         opt => opt.MapFrom(x => x.JobHistory.OrderByDescending(o => o.Id).FirstOrDefault().Job.Id))
@@ -64,10 +65,26 @@ namespace HRM_System_UI.Helpers
                         d => d.DeptTitle,
                         opt => opt.MapFrom(x => x.Departament.Title));
 
+                    cfg.CreateMap<EmployeeBll, EditInfoEmployeeViewModel>().ReverseMap();
+
                     cfg.CreateMap<VacationBll, CreateVacationViewModel>()
+                    .ForMember(
+                        d => d.StartDate,
+                        opt => opt.MapFrom(x => x.StartDate ?? DateTime.MinValue))
+                    .ForMember(
+                        d => d.EndDate,
+                        opt => opt.MapFrom(x => x.EndDate ?? DateTime.MinValue))
                     .ForMember(
                         d => d.EmpId,
                         opt => opt.MapFrom(x => x.Id));
+
+                    cfg.CreateMap<EmployeeBll, DetailsEmployeeViewModel>()
+                    .ForMember(
+                        d => d.FullName,
+                        opt => opt.MapFrom(x => $"{x.SecondName} {x.FirstName} {x.ThirdName}"))
+                    .ForMember(
+                        d => d.BirthDay,
+                        opt => opt.MapFrom(x => ((DateTime)x.Birthday).ToShortDateString()));
                 });
 
                 _mapper = new Mapper(config);

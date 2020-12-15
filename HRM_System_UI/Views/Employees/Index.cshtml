@@ -34,6 +34,9 @@
             @Html.DisplayNameFor(model => model.Fired)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.OnVacation)
+        </th>
+        <th>
             <span>Статус: </span>
             <select id="filter" name="empStatus" class="control-label">
                 <option value="all">Все</option>
@@ -66,6 +69,9 @@
             </td>
             <td>
                 @Html.CheckBoxFor(model => item.Fired, new { @disabled = "disabled" })
+            </td>
+            <td>
+                @Html.CheckBoxFor(model => item.OnVacation, new { @disabled = "disabled" })
             </td>
             <td>
                 @Html.ActionLink("Карьера", "Edit", new { id = item.Id }) |

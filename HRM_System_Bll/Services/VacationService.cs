@@ -75,12 +75,22 @@ namespace HRM_System_Bll.Services
         {
             var emp = _db.Employees.FirstOrDefault(x => x.Id == id);
             var vacations = emp.VacationHistory;
-
+            var availableDays = 0;
             var lastVacation = vacations.OrderByDescending(x => x.EndDate).FirstOrDefault();
+            if(lastVacation != null)
+                availableDays = (DateTime.Now - (DateTime)lastVacation.EndDate).Days / 30 * 2;
+            else
+                availableDays = (DateTime.Now - (DateTime)emp.HireDate).Days / 30 * 2;
 
-            var availableDays = (DateTime.Now - (DateTime)lastVacation.EndDate).Days / 30 * 2;
             availableDays += vacations.Sum(x => x.AvailableDays);
             return availableDays;
+        }
+
+        public bool CheckOnVacation(DateTime date, int id)
+        {
+            var emp = _db.Employees.FirstOrDefault(x => x.Id == id);
+            var vacations = emp.VacationHistory;
+            return vacations.Any(x => x.StartDate >= date && x.EndDate <= date);
         }
     }
 }

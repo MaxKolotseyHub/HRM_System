@@ -7,6 +7,7 @@ using HRM_System_UI.Models.Filters;
 using HRM_System_UI.Models.Vacation;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -34,13 +35,17 @@ namespace HRM_System_UI.Controllers
             _vacationService = vacationService;
             _mapper = mapper;
         }
-        // GET: Employees
+
         [HttpGet]
         public ActionResult Index(string fired)
         {
-
             ViewBag.Filter = string.IsNullOrEmpty(fired) ? "all" : fired;
             var empls = _mapper.Map<IEnumerable<IndexEmployeeViewModel>>(_service.GetAll());
+
+            foreach (var emp in empls)
+            {
+                emp.OnVacation = _vacationService.CheckOnVacation(DateTime.Now, emp.Id);
+            }
 
             if (string.Equals(fired, "fired"))
                 return View(empls.Where(x => x.Fired));
@@ -119,33 +124,16 @@ namespace HRM_System_UI.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public IEnumerable<IndexEmployeeViewModel> GetEmployees(CustomFilter filter)
-        {
-            if (!ModelState.IsValid)
-            {
-                return new List<IndexEmployeeViewModel>();
-            }
-
-            var empls = _mapper.Map<IEnumerable<IndexEmployeeViewModel>>(_service.GetAll());
-
-            if (filter.All)
-                return empls;
-
-            if (filter.Fired)
-                return empls.Where(x => x.Fired);
-
-            if (!filter.Fired)
-                return empls.Where(x => !x.Fired);
-
-            return new List<IndexEmployeeViewModel>();
-        }
-
         [HttpGet]
         public ActionResult Vacation(int id)
         {
             var emp = _service.GetById(id);
-            var vac = _mapper.Map<CreateVacationViewModel>(emp);
+            var availableDays = _vacationService.GetAvailableDays(id);
+            var vac = new CreateVacationViewModel
+            {
+                EmpId = emp.Id,
+                AvailableDays = availableDays,
+            };
             return View(vac);
         }
 
@@ -157,14 +145,41 @@ namespace HRM_System_UI.Controllers
                 return View(model);
             }
 
-            var availableDays = _vacationService.GetAvailableDays(model.EmpId);
             var vacationDays = ((DateTime)model.EndDate - (DateTime)model.StartDate).Days;
-            if (vacationDays > availableDays)
+            if (vacationDays > model.AvailableDays)
+            {
+                model.ErrorMessage = "Количество выбранных дней не должно превышать количество доступных дней.";
                 return View(model);
+            }
 
             await _vacationService.StartVacation(model.EmpId, model.StartDate, model.EndDate);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            var vm = _mapper.Map<DetailsEmployeeViewModel>(_service.GetById(id));
+            return View(vm);
+        }
+
+        [HttpGet]
+        public ActionResult EditInfo(int id)
+        {
+            var vm = _mapper.Map<EditInfoEmployeeViewModel>(_service.GetById(id));
+            return View(vm);
+        }    
+        
+        [HttpPost]
+        public async Task<ActionResult> EditInfo(EditInfoEmployeeViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            await _service.Update(_mapper.Map<EmployeeBll>(model));
+
+            return RedirectToAction("Details",  new { id = model.Id});
         }
     }
 }

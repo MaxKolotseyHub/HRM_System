@@ -15,5 +15,6 @@ namespace HRM_System_Bll.Interfaces
         Task ChangeJob(int id, int newJobId, DateTime changeDate, int deptId, decimal Salary);
         IEnumerable<EmployeeBll> GetAll();
         EmployeeBll GetById(int id);
+        Task Update(EmployeeBll model);
     }
 }

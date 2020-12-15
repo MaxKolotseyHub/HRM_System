@@ -149,5 +149,19 @@ namespace HRM_System_Bll.Services
             return _mapper.Map<EmployeeBll>(emp);
         }
 
+        public async Task Update(EmployeeBll model)
+        {
+            var emp = _db.Employees.FirstOrDefault(x => x.Id == model.Id);
+            if (emp == null)
+                throw new KeyNotFoundException($"Не найден сотрудник с идентификационным номером {model.Id}");
+
+            emp.Birthday = model.Birthday;
+            emp.Email = model.Email;
+            emp.FirstName = model.FirstName;
+            emp.SecondName = model.SecondName;
+            emp.ThirdName = model.ThirdName;
+
+            await _db.SaveChangesAsync();
+        }
     }
 }

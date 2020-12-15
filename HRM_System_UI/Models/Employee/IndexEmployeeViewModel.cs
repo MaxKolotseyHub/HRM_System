@@ -24,5 +24,7 @@ namespace HRM_System_UI.Models.Employee
         public string JobTitle { get; set; }
         [Display(Name ="Уволен")]
         public bool Fired { get; set; }
+        [Display(Name ="В отпуске")]
+        public bool OnVacation { get; set; } 
     }
 }
