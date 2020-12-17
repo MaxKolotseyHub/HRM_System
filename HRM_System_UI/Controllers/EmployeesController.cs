@@ -15,6 +15,7 @@ using System.Web.Mvc;
 
 namespace HRM_System_UI.Controllers
 {
+    [Authorize(Roles = "user,admin")]
     public class EmployeesController : Controller
     {
         private readonly IEmployeeService _service;
@@ -144,7 +145,11 @@ namespace HRM_System_UI.Controllers
             {
                 return View(model);
             }
-
+            if (model.EndDate < model.StartDate)
+            {
+                model.ErrorMessage = "Неверно выбраны даты отпуска.";
+                return View(model);
+            }
             var vacationDays = ((DateTime)model.EndDate - (DateTime)model.StartDate).Days;
             if (vacationDays > model.AvailableDays)
             {

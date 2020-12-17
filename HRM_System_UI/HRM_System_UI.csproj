@@ -254,14 +254,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DepartamentsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PositionsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AutomapperConfig.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Departaments\IndexDepartamentViewModel.cs" />
     <Compile Include="Models\Employee\CreateEmployeeViewModel.cs" />
     <Compile Include="Models\Employee\DetailsEmployeeViewModel.cs" />
     <Compile Include="Models\Employee\EditEmployeeViewModel.cs" />
@@ -270,6 +275,7 @@
     <Compile Include="Models\Filters\CustomFilter.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\JobHistory\EditJobHistoryViewModel.cs" />
+    <Compile Include="Models\Jobs\IndexJobViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Vacation\CreateVacationViewModel.cs" />
     <Compile Include="Modules\UiNinjectModule.cs" />
@@ -283,6 +289,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Chart.css" />
     <Content Include="Content\Chart.min.css" />
+    <Content Include="Content\Images\mainPage.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -367,6 +374,14 @@
     <Content Include="Views\Employees\Vacation.cshtml" />
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\EditInfo.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Positions\Index.cshtml" />
+    <Content Include="Views\Positions\Edit.cshtml" />
+    <Content Include="Views\Departaments\Index.cshtml" />
+    <Content Include="Views\Departaments\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

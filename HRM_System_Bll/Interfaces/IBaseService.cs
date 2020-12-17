@@ -10,6 +10,7 @@ namespace HRM_System_Bll.Interfaces
     {
         IEnumerable<T> GetAll();
         Task Add(T model);
+        Task Update(T model);
         Task Delete(int id);
         T GetById(int id);
     }

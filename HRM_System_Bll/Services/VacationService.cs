@@ -92,5 +92,10 @@ namespace HRM_System_Bll.Services
             var vacations = emp.VacationHistory;
             return vacations.Any(x => x.StartDate >= date && x.EndDate <= date);
         }
+
+        public Task Update(VacationBll model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<HRM_System_UI.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Список пользователей</h2>
+<div class="container row justify-content-between">
+    <p>
+        @Html.ActionLink("Новый пользователь", "Create")
+    </p>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            <span class="control-label">Email</span>
+        </th>
+        <th>
+            <span class="control-label">Имя пользователя</span>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="Search">
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
+                @if (item.UserName != "admin")
+                {
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

@@ -52,5 +52,12 @@ namespace HRM_System_Bll.Services
             var dept = _db.Departaments.FirstOrDefault(x => x.Id == id);
             return  dept == null ? null : _mapper.Map<DepartamentBll>(dept);
         }
+
+        public async Task Update(DepartamentBll model)
+        {
+            var dept = _db.Departaments.FirstOrDefault(x => x.Id == model.Id);
+            dept.Title = model.Title;
+            await _db.SaveChangesAsync();
+        }
     }
 }

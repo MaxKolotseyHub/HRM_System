@@ -52,5 +52,14 @@ namespace HRM_System_Bll.Services
             var job = _db.Jobs.FirstOrDefault(x => x.Id == id);
             return job == null ? null : _mapper.Map<JobBll>(job);
         }
+
+        public async Task Update(JobBll model)
+        {
+            var job = _db.Jobs.FirstOrDefault(x => x.Id == model.Id);
+            job.MaxSalary = model.MaxSalary;
+            job.MinSalary = model.MinSalary;
+            job.Title = model.Title;
+            await _db.SaveChangesAsync();
+        }
     }
 }

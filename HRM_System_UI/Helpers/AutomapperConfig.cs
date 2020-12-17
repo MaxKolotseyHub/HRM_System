@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using HRM_System_Bll.Models;
+using HRM_System_UI.Models.Departaments;
 using HRM_System_UI.Models.Employee;
 using HRM_System_UI.Models.JobHistory;
+using HRM_System_UI.Models.Jobs;
 using HRM_System_UI.Models.Vacation;
 using System;
 using System.Collections.Generic;
@@ -66,6 +68,8 @@ namespace HRM_System_UI.Helpers
                         opt => opt.MapFrom(x => x.Departament.Title));
 
                     cfg.CreateMap<EmployeeBll, EditInfoEmployeeViewModel>().ReverseMap();
+                    cfg.CreateMap<JobBll, IndexJobViewModel>().ReverseMap();
+                    cfg.CreateMap<DepartamentBll, IndexDepartamentViewModel>().ReverseMap();
 
                     cfg.CreateMap<VacationBll, CreateVacationViewModel>()
                     .ForMember(

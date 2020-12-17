@@ -1,0 +1,101 @@
+﻿@model HRM_System_UI.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Edit";
+}
+<h2>Редактирование</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p class = "control-label col-md-2" >Заблокирован</p>
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.LockoutEnabled)
+                    @Html.ValidationMessageFor(model => model.LockoutEnabled, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p class = "control-label col-md-2" >Количество ошибок при входе</p>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AccessFailedCount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AccessFailedCount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            <p class = "control-label col-md-2" >Имя пользователя</p>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div class="form-group">
+    <p>Роли</p>
+    <div class="col">
+        <table class="table text-center col">
+            @foreach (var role in ViewBag.Roles)
+            {
+                <tr>
+                    <td>@role</td>
+                    <td>
+                        <form method="post" action="/Users/DeleteRole">
+                            <input type="hidden" name="roleName" value="@role" />
+                            <input type="hidden" name="userId" value="@Model.Id" />
+                            <input type="submit" value="Удалить" class="btn btn-outline-danger" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+@if (@ViewBag.FreeRoles.Count != 0)
+{
+    <div class="form-group">
+        <div class="col-md-10 form-group">
+            <form action="/Users/AddToRole" method="post">
+                <select name="roleName" id="selectRoles">
+                    @foreach (var role in ViewBag.FreeRoles)
+                    {
+                        <option value="@role.Name">@role.Name</option>
+                    }
+                </select>
+                <input type="hidden" value="@Model.Id" name="userId" />
+                <input type="submit" value="Добавить роль" />
+            </form>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Назад", "Index")
+</div>
