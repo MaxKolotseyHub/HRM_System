@@ -1,18 +1,14 @@
-<div class=" mce-scroll" style="position: absolute; left: 16%; top: 10%; width: 85%;">
-    <div class="my-flex">
-        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-200 position-relative "
-            *ngFor="let empl of employees;" style="width: 400px; margin: 5px;">
-            <div class="col-7 p-4 d-flex flex-column position-static">
-                <strong class="d-inline-block mb-2 text-primary">{{empl.FullName}}</strong>
-                <p class="card-text mb-auto">{{empl.Email}}</p>
-                <h5 class="mb-0">{{empl.JobTitle}}</h5>
-                <p class="card-text mb-auto">{{empl.DepartamentTitle}}</p>
-                <a href="#" class="stretched-link">Личное дело</a>
-            </div>
-            <div class="col-2 d-none d-lg-block mt-4">
-                <img src="/assets/avatar.png" alt="" width="150px">
+<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-200 position-relative "
+    style="width: 400px; height: 200px; margin: 5px;">
+    <div class="col-7 p-4 d-flex flex-column position-static">
+        <strong class="d-inline-block mb-2 text-primary">{{empl.FullName}}</strong>
+        <p class="card-text mb-auto">{{empl.Email}}</p>
+        <h5 class="mb-0">{{empl.JobTitle}}</h5>
+        <p class="card-text mb-auto">{{empl.DepartamentTitle}}</p>
+        <a href="#" class="stretched-link">Личное дело</a>
+    </div>
+    <div class="col-2 d-none d-lg-block mt-4">
+        <img src="/assets/avatar.png" alt="" width="150px">
 
-            </div>
-        </div>
     </div>
 </div>

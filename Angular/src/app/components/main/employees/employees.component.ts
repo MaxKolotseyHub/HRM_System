@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EmployeeDto } from 'src/app/models/employeeDto';
 import { EmployeeService } from 'src/app/services/employee.service';
 
@@ -10,12 +10,11 @@ import { EmployeeService } from 'src/app/services/employee.service';
 })
 export class EmployeesComponent implements OnInit {
 
-  employees: Array<EmployeeDto>;
+  @Input() empl: EmployeeDto;
 
-  constructor(private employeeSrv: EmployeeService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.employeeSrv.getEmployees().subscribe(model => this.employees = model, err => { }, () => this.employees.push(this.employees[0]));
 
   }
 
