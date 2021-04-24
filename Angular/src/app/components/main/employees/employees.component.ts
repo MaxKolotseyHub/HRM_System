@@ -5,7 +5,8 @@ import { EmployeeService } from 'src/app/services/employee.service';
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
-  styleUrls: ['./employees.component.scss']
+  styleUrls: ['./employees.component.scss'],
+  providers: []
 })
 export class EmployeesComponent implements OnInit {
 
@@ -14,7 +15,9 @@ export class EmployeesComponent implements OnInit {
   constructor(private employeeSrv: EmployeeService) { }
 
   ngOnInit(): void {
-    this.employeeSrv.getEmployees().subscribe(model => this.employees = model);
+    this.employeeSrv.getEmployees().subscribe(model => this.employees = model, err => { }, () => this.employees.push(this.employees[0]));
+
   }
+
 
 }
