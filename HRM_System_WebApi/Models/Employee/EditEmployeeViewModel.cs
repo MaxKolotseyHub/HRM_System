@@ -24,6 +24,12 @@ namespace HRM_System_WebApi.Models.Employee
         [Display(Name ="Новая должность")]
         public int NewJobId { get; set; }
         public bool Fired { get; set; }
+        public string FirstName{ get; set; }
+        public string SecondName{ get; set; }
+        public string ThirdName{ get; set; }
+        public string PhoneNumber { get; set; }
+        public DateTime? Birthday { get; set; }
+        public string Email { get; set; }
         public IEnumerable<JobBll> Jobs{ get; set; } 
         public IEnumerable<EditJobHistoryViewModel> JobHistory{ get; set; } 
         public IEnumerable<DepartamentBll> Depts{ get; set; }

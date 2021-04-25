@@ -2,6 +2,7 @@ import { isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { EmployeeDto } from './models/employeeDto';
 import { EmployeeService } from './services/employee.service';
+import { LoginService } from './services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +11,14 @@ import { EmployeeService } from './services/employee.service';
 })
 export class AppComponent implements OnInit {
 
+  loggedIn: boolean;
 
-  constructor() {
+  constructor(private loginService: LoginService) {
 
   }
 
   ngOnInit(): void {
+    this.loginService.LoggedOn$.subscribe(loggedIn => this.loggedIn = loggedIn);
   }
 
   title = 'Angular';

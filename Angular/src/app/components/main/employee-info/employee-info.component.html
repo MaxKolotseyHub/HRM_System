@@ -1,0 +1,19 @@
+<div class="tab">
+    <button class="tablinks" (click)="this.openTab(1)">Анкета</button>
+    <button class="tablinks" (click)="this.openTab(2)">Карьера</button>
+    <button class="tablinks" (click)="this.openTab(3)">Отпуск</button>
+</div>
+
+<!-- Tab content -->
+<div *ngIf="this.tab == 1" class="tabcontent">
+    <app-personal-details [employee]="this.employee" [job]="this.job" [departament]="this.departament">
+    </app-personal-details>
+</div>
+
+<div *ngIf="this.tab == 2" class="tabcontent">
+    <app-career></app-career>>
+</div>
+
+<div *ngIf="this.tab == 3" class="tabcontent">
+    <app-vacation></app-vacation>
+</div>

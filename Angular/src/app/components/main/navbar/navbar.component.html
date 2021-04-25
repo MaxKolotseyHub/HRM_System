@@ -8,7 +8,9 @@
                 HR Management
             </nav>
             <div class="col-1">
-                <a routerLink="/login" class="text-white" style="font-size: small;">Войти</a>
+                <a routerLink="/login" class="text-white" style="font-size: small;" *ngIf="!this.loggedIn">Войти</a>
+                <a routerLink="/home" class="text-white" style="font-size: small;" *ngIf="this.loggedIn"
+                    (click)="this.logout()">Выйти</a>
             </div>
         </div>
     </div>

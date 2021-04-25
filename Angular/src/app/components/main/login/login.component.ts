@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +11,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  loginGroup: FormGroup;
+
+  constructor(private loginService: LoginService, private router: Router, private fb: FormBuilder) {
+    this.loginGroup = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
+    });
+
+  }
 
   ngOnInit(): void {
+    this.loginService.LoggedOn$.pipe(filter(_ => _)).subscribe(_ => {
+      this.router.navigate(['home']);
+    });
+  }
+
+  login() {
+    this.loginService.login(this.loginGroup.value.email, this.loginGroup.value.password);
   }
 
 }

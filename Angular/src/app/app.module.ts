@@ -11,6 +11,11 @@ import { EmployeeCardComponent } from './components/main/employee-card/employee-
 import { LoginComponent } from './components/main/login/login.component';
 import { NotFoundComponent } from './components/main/not-found/not-found.component';
 import { EmplRoutingModule } from './empl-routing/empl-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { EmployeeInfoComponent } from './components/main/employee-info/employee-info.component';
+import { PersonalDetailsComponent } from './components/main/employee-info/personal-details/personal-details.component';
+import { CareerComponent } from './components/main/employee-info/career/career.component';
+import { VacationComponent } from './components/main/employee-info/vacation/vacation.component';
 
 @NgModule({
   declarations: [
@@ -21,11 +26,16 @@ import { EmplRoutingModule } from './empl-routing/empl-routing.module';
     HomeComponent,
     EmployeeCardComponent,
     LoginComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    EmployeeInfoComponent,
+    PersonalDetailsComponent,
+    CareerComponent,
+    VacationComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    ReactiveFormsModule,
     EmplRoutingModule
   ],
   providers: [],

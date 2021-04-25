@@ -5,10 +5,13 @@ import { HomeComponent } from '../components/main/home/home.component';
 import { EmployeesComponent } from '../components/main/employees/employees.component';
 import { LoginComponent } from '../components/main/login/login.component';
 import { NotFoundComponent } from '../components/main/not-found/not-found.component';
+import { EmployeesGuard } from '../employees.guard';
+import { EmployeeInfoComponent } from '../components/main/employee-info/employee-info.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'employees', component: EmployeesComponent },
+  { path: 'employees', component: EmployeesComponent, canActivate: [EmployeesGuard] },
+  { path: 'employees/:id', component: EmployeeInfoComponent, canActivate: [EmployeesGuard] },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
