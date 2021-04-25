@@ -10,14 +10,12 @@ import { EmployeeService } from './services/employee.service';
 })
 export class AppComponent implements OnInit {
 
-  employees: EmployeeDto[] = [];
 
-  constructor(private employeesSrv: EmployeeService) {
+  constructor() {
 
   }
 
   ngOnInit(): void {
-    this.employeesSrv.getEmployees().subscribe(model => this.employees = model);
   }
 
   title = 'Angular';

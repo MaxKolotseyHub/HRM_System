@@ -1,13 +1,5 @@
-<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-200 position-relative "
-    style="width: 400px; height: 200px; margin: 5px;">
-    <div class="col-7 p-4 d-flex flex-column position-static">
-        <strong class="d-inline-block mb-2 text-primary">{{empl.FullName}}</strong>
-        <h5 class="mb-0">{{empl.JobTitle}}</h5>
-        <p class="mb-auto">{{empl.DepartamentTitle}}</p>
-        <a href="#" class="stretched-link">Личное дело</a>
-    </div>
-    <div class="col-2 d-none d-lg-block mt-4">
-        <img src="/assets/avatar.png" alt="" width="150px">
-
+<div class=" mce-scroll">
+    <div class="my-flex">
+        <app-employee-card [empl]="empl" *ngFor="let empl of employees"></app-employee-card>
     </div>
 </div>

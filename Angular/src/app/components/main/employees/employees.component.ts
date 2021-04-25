@@ -10,11 +10,12 @@ import { EmployeeService } from 'src/app/services/employee.service';
 })
 export class EmployeesComponent implements OnInit {
 
-  @Input() empl: EmployeeDto;
+  employees: EmployeeDto[] = [];
 
-  constructor() { }
+  constructor(private employeesSrv: EmployeeService) { }
 
   ngOnInit(): void {
+    this.employeesSrv.getEmployees().subscribe(model => this.employees = model);
 
   }
 

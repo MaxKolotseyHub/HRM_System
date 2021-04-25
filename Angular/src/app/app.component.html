@@ -4,9 +4,6 @@
 <div class="row">
     <app-sidebar></app-sidebar>
 </div>
-<div class=" mce-scroll" style="position: absolute; left: 15%; top: 10%; width: 85%;">
-    <div class="my-flex">
-        <app-employees [empl]="empl" *ngFor="let empl of employees"></app-employees>
-
-    </div>
+<div class="" style="position: absolute; left: 15%; top: 10%; width: 85;">
+    <router-outlet></router-outlet>
 </div>
