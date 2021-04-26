@@ -16,7 +16,6 @@ export class PersonalDetailsComponent implements OnInit {
 
   @Input() employee: EmployeeInfoDto;
   @Input() departament: DepartamentDto;
-  @Input() job: JobDto;
 
   empl: EmployeeInfo;
 
@@ -30,7 +29,8 @@ export class PersonalDetailsComponent implements OnInit {
 
   updatePesonalInfo() {
     console.log(this.empl);
-
-    // this.employeeService.updatePersonalInfo()
+    this.employee.SecondName = 'Флексовый';
+    this.employeeService.updatePersonalInfo(this.employee)
+      .subscribe(info => console.log(info));
   }
 }

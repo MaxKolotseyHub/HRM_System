@@ -37,28 +37,11 @@
                         required="">{{employee.Birthday}}</label>
                 </div>
 
-                <div class="col-12">
-                    <label for="address2" class="form-label">Департамент</label>
-                    <label type="text" class="form-control" id="address2"
-                        placeholder="Apartment or suite">{{departament.Title}}</label>
-                </div>
+                <hr class="my-4">
+                <hr class="my-4">
 
-                <div class="col-12">
-                    <label for="address2" class="form-label">Позиция</label>
-                    <label type="text" class="form-control" id="address2"
-                        placeholder="Apartment or suite">{{job.Title}}</label>
-                </div>
-
-                <div class="col-12">
-                    <label for="address2" class="form-label">Оклад</label>
-                    <label type="text" class="form-control" id="address2"
-                        placeholder="Apartment or suite">{{employee.Salary}}</label>
-                </div>
+                <button class="w-100 btn btn-primary btn-lg" (click)="this.updatePesonalInfo()">Сохранить
+                    изменения</button>
             </div>
-
-            <hr class="my-4">
-
-            <button class="w-100 btn btn-primary btn-lg" (click)="this.updatePesonalInfo()">Сохранить изменения</button>
         </div>
     </div>
-</div>

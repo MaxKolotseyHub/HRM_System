@@ -22,8 +22,8 @@ export class EmployeeInfoComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private employeeService: EmployeeService) {
     route.paramMap.pipe(switchMap((params) => {
-      const id = +params.get('id');
-      return this.employeeService.getEmployeeById(id);
+      this.id = +params.get('id');
+      return this.employeeService.getEmployeeById(this.id);
     })
     ).subscribe(data => {
       this.employee = data;
@@ -31,7 +31,6 @@ export class EmployeeInfoComponent implements OnInit {
       this.departament = this.employee.Depts.find((item, i, array) => item.Id == this.employee.DepartamentId);
       this.job = this.employee.Jobs.find((item, i, array) => item.Id == this.employee.JobId);
       this.tab = 1;
-
     });
 
   }

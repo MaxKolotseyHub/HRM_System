@@ -16,6 +16,7 @@ import { EmployeeInfoComponent } from './components/main/employee-info/employee-
 import { PersonalDetailsComponent } from './components/main/employee-info/personal-details/personal-details.component';
 import { CareerComponent } from './components/main/employee-info/career/career.component';
 import { VacationComponent } from './components/main/employee-info/vacation/vacation.component';
+import { AnalyticsComponent } from './components/main/analytics/analytics.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { VacationComponent } from './components/main/employee-info/vacation/vaca
     EmployeeInfoComponent,
     PersonalDetailsComponent,
     CareerComponent,
-    VacationComponent
+    VacationComponent,
+    AnalyticsComponent
   ],
   imports: [
     BrowserModule,

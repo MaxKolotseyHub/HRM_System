@@ -6,14 +6,14 @@
 
 <!-- Tab content -->
 <div *ngIf="this.tab == 1" class="tabcontent">
-    <app-personal-details [employee]="this.employee" [job]="this.job" [departament]="this.departament">
+    <app-personal-details [employee]="this.employee" [departament]="this.departament">
     </app-personal-details>
 </div>
 
 <div *ngIf="this.tab == 2" class="tabcontent">
-    <app-career></app-career>>
+    <app-career [job]="this.job" [employee]="this.employee" [departament]="this.departament"></app-career>>
 </div>
 
 <div *ngIf="this.tab == 3" class="tabcontent">
-    <app-vacation></app-vacation>
+    <app-vacation [id]="this.id"></app-vacation>
 </div>
