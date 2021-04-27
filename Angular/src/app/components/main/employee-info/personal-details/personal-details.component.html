@@ -6,29 +6,29 @@
 
     <div class="col-md-7 col-lg-8">
         <div class="needs-validation" novalidate="">
-            <div class="row g-3">
+            <form class="row g-3" [formGroup]="emplGroup">
                 <div class="col-sm-6">
                     <label for="firstName" class="form-label">Фамилия</label>
-                    <input class="form-control" value="{{empl.SecondName}}">
+                    <input class="form-control" value="{{empl.SecondName}}" formControlName="SecondName">
                 </div>
 
                 <div class="col-sm-6">
                     <label for="lastName" class="form-label">Имя</label>
                     <input type="text" class="form-control" id="lastName" placeholder="" required=""
-                        value="{{employee.FirstName}}">
+                        value="{{employee.FirstName}}" formControlName="FirstName">
                 </div>
 
 
                 <div class="col-sm-6">
                     <label for="lastName" class="form-label">Отчество</label>
                     <input type="text" class="form-control" id="lastName" placeholder="" required=""
-                        value="{{employee.ThirdName}}">
+                        value="{{employee.ThirdName}}" formControlName="ThirdName">
                 </div>
 
                 <div class="col-12">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" placeholder="you@example.com"
-                        value="{{employee.Email}}">
+                        value="{{employee.Email}}" formControlName="Email">
                 </div>
 
                 <div class="col-12">
@@ -42,6 +42,6 @@
 
                 <button class="w-100 btn btn-primary btn-lg" (click)="this.updatePesonalInfo()">Сохранить
                     изменения</button>
-            </div>
+            </form>
         </div>
     </div>

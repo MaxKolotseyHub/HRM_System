@@ -4,6 +4,10 @@ import { JobHistoryDto } from "./jobHistory/jobHistoryDto";
 import { JobDto } from "./jobs/jobDto";
 
 export class EmployeeInfo implements EmployeeInfoDto {
+    Efficiency: number;
+    NewDepartamentId: number;
+    NewJobId: number;
+    NewSalary: number;
     Id: number;
     HireDate: Date;
     Birthday: Date;

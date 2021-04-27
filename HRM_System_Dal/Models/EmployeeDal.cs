@@ -20,6 +20,7 @@ namespace HRM_System_Dal.Models
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public decimal Salary { get; set; }
+        public double Efficiency { get; set; } = 100;
         public DateTime? HireDate { get; set; }
         public DateTime? FireDate { get; set; } 
         public int ManagerId { get; set; }

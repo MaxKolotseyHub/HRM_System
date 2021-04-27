@@ -25,6 +25,7 @@ namespace HRM_System_WebApi.Models.Employee
         [Display(Name ="Уволен")]
         public bool Fired { get; set; }
         [Display(Name ="В отпуске")]
-        public bool OnVacation { get; set; } 
+        public bool OnVacation { get; set; }
+        public double Efficiency { get; set; }
     }
 }

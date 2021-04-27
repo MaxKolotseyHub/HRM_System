@@ -163,5 +163,16 @@ namespace HRM_System_Bll.Services
 
             await _db.SaveChangesAsync();
         }
+
+        public async Task UpdateEfficiency(int id, double value)
+        {
+            var emp = _db.Employees.FirstOrDefault(x => x.Id == id);
+            if (emp == null)
+                throw new KeyNotFoundException($"Не найден сотрудник с идентификационным номером {id}");
+
+            emp.Efficiency = value;
+
+            await _db.SaveChangesAsync();
+        }
     }
 }

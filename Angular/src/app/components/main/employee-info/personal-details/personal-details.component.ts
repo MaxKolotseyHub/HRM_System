@@ -1,5 +1,6 @@
 import { InvokeFunctionExpr } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeesGuard } from 'src/app/employees.guard';
 import { DepartamentDto } from 'src/app/models/departaments/departamentDto';
 import { EmployeeInfo } from 'src/app/models/employeeInfo';
@@ -17,19 +18,29 @@ export class PersonalDetailsComponent implements OnInit {
   @Input() employee: EmployeeInfoDto;
   @Input() departament: DepartamentDto;
 
+  emplGroup: FormGroup;
   empl: EmployeeInfo;
 
-  constructor(private employeeService: EmployeeService) {
+  constructor(private employeeService: EmployeeService, private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.empl = this.employee;
-    console.log(this.empl);
+    this.emplGroup = this.fb.group({
+      FirstName: [this.employee.FirstName, [Validators.required]],
+      SecondName: ['', [Validators.required]],
+      Email: ['', [Validators.required]],
+      ThirdName: ['', [Validators.required]]
+    });
   }
 
   updatePesonalInfo() {
-    console.log(this.empl);
-    this.employee.SecondName = 'Флексовый';
+    if (this.emplGroup.invalid)
+      return;
+
+    this.employee.FirstName = this.emplGroup.value.FirstName;
+    this.employee.SecondName = this.emplGroup.value.SecondName;
+    this.employee.ThirdName = this.emplGroup.value.ThirdName;
+    this.employee.Email = this.emplGroup.value.Email;
     this.employeeService.updatePersonalInfo(this.employee)
       .subscribe(info => console.log(info));
   }

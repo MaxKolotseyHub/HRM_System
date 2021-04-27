@@ -16,5 +16,6 @@ namespace HRM_System_Bll.Interfaces
         IEnumerable<EmployeeBll> GetAll();
         EmployeeBll GetById(int id);
         Task Update(EmployeeBll model);
+        Task UpdateEfficiency(int id, double value);
     }
 }

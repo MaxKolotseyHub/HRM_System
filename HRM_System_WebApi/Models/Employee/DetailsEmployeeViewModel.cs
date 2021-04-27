@@ -17,5 +17,6 @@ namespace HRM_System_WebApi.Models.Employee
         public string PhoneNumber { get; set; }
         [Display(Name="Дата рождения:")]
         public string BirthDay { get; set; }
+        public double Efficiency { get; set; }
     }
 }

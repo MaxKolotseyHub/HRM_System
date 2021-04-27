@@ -26,7 +26,7 @@ namespace HRM_System_Bll.Helpers
 
                 _mapper = new Mapper(config);
             }
-            return _mapper;
+            return _mapper; 
         }
     }
 }

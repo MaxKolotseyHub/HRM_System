@@ -40,6 +40,7 @@ namespace HRM_System_WebApi.Models.Employee
         [Display(Name ="Должность")]
         [Required]
         public int JobId { get; set; }
+        public double Efficiency { get; set; }
         public IEnumerable<JobBll> Jobs { get; set; }
         public IEnumerable<DepartamentBll> Depts { get; set; }
     }

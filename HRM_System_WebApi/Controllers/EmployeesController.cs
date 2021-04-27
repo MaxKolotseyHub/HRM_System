@@ -171,5 +171,14 @@ namespace HRM_System_WebApi.Controllers
 
             return Ok();
         }
+
+        [Route("api/employees/efficiency"), HttpGet]
+        public async Task<IHttpActionResult> ChangeEfficiency([FromUri]int id,[FromUri] double efficiency)
+        {
+
+            await _service.UpdateEfficiency(id,efficiency);
+
+            return Ok();
+        }
     }
 }

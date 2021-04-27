@@ -26,6 +26,7 @@ namespace HRM_System_WebApi.Models.Employee
         [Display(Name = "Номер телефона")]
         [Required]
         public string PhoneNumber { get; set; }
+        public double Efficiency { get; set; }
         [Display(Name = "Дата рождения")]
         [Required]
         public DateTime? Birthday { get => birthday; set => birthday = value; }

@@ -17,7 +17,11 @@ export interface EmployeeInfoDto {
     Salary: number;
     Depts: DepartamentDto[];
     DepartamentId: number;
+    Efficiency: number;
     Jobs: JobDto[];
     JobId: number;
     JobHistory: JobHistoryDto[];
+    NewDepartamentId: number;
+    NewJobId: number;
+    NewSalary: number;
 }

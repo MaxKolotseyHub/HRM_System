@@ -28,6 +28,7 @@ namespace HRM_System_WebApi.Models.Employee
         public string SecondName{ get; set; }
         public string ThirdName{ get; set; }
         public string PhoneNumber { get; set; }
+        public double Efficiency { get; set; }
         public DateTime? Birthday { get; set; }
         public string Email { get; set; }
         public IEnumerable<JobBll> Jobs{ get; set; } 
