@@ -39,7 +39,7 @@ export class EmployeeService {
   }
 
   changeJobInfo(model: EmployeeInfoDto) {
-    return this.http.post(`${environment.backendUrl}/api/employees`, model)
+    return this.http.post(`${environment.backendUrl}/api/employees/${model.Id}`, model)
   }
 
   changeEfficiency(id: number, val: number) {

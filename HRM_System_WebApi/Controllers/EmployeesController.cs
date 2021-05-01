@@ -83,8 +83,8 @@ namespace HRM_System_WebApi.Controllers
             return Ok(emp);
         }
 
-        [Route("api/employees"), HttpPost]
-        public async Task<IHttpActionResult> Edit(EditEmployeeViewModel model)
+        [Route("api/employees/{id}"), HttpPost]
+        public async Task<IHttpActionResult> Edit(int id, EditEmployeeViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace HRM_System_WebApi.Controllers
 
             if (model.JobId != model.NewJobId || model.DepartamentId != model.NewDepartamentId)
             {
-                await _service.ChangeJob(model.Id, model.NewJobId, DateTime.Now, model.NewDepartamentId, model.NewSalary);
+                await _service.ChangeJob(id, model.NewJobId, DateTime.Now, model.NewDepartamentId, model.NewSalary);
                 return Ok();
             }
 
@@ -175,9 +175,7 @@ namespace HRM_System_WebApi.Controllers
         [Route("api/employees/efficiency"), HttpGet]
         public async Task<IHttpActionResult> ChangeEfficiency([FromUri]int id,[FromUri] double efficiency)
         {
-
             await _service.UpdateEfficiency(id,efficiency);
-
             return Ok();
         }
     }

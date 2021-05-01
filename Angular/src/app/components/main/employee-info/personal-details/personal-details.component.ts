@@ -1,6 +1,7 @@
 import { InvokeFunctionExpr } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { switchMap } from 'rxjs/operators';
 import { EmployeesGuard } from 'src/app/employees.guard';
 import { DepartamentDto } from 'src/app/models/departaments/departamentDto';
 import { EmployeeInfo } from 'src/app/models/employeeInfo';
@@ -25,11 +26,13 @@ export class PersonalDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.employee);
+
     this.emplGroup = this.fb.group({
       FirstName: [this.employee.FirstName, [Validators.required]],
-      SecondName: ['', [Validators.required]],
-      Email: ['', [Validators.required]],
-      ThirdName: ['', [Validators.required]]
+      SecondName: [this.employee.SecondName, [Validators.required]],
+      Email: [this.employee.Email, [Validators.required, Validators.email]],
+      ThirdName: [this.employee.ThirdName, [Validators.required]]
     });
   }
 
@@ -41,7 +44,6 @@ export class PersonalDetailsComponent implements OnInit {
     this.employee.SecondName = this.emplGroup.value.SecondName;
     this.employee.ThirdName = this.emplGroup.value.ThirdName;
     this.employee.Email = this.emplGroup.value.Email;
-    this.employeeService.updatePersonalInfo(this.employee)
-      .subscribe(info => console.log(info));
+    this.employeeService.updatePersonalInfo(this.employee).subscribe();
   }
 }

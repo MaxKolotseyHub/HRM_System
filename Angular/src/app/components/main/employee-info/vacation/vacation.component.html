@@ -9,7 +9,7 @@
             <div class="row g-3">
                 <div class="col-12">
                     <label for="address2" class="form-label">Количество доступных дней отпуска</label>
-                    <label type="text" class="form-control" id="address2"
+                    <label type="text" class="form-control form-control-sm" id="address2"
                         placeholder="Apartment or suite">{{vacation.AvailableDays}}</label>
                 </div>
 
@@ -22,18 +22,21 @@
 
                 <div class="col-12">
                     <label for="address2" class="form-label">Начало отпуска</label>
-                    <input type="date" class="form-control" formControlName="StartDate">
+                    <input type="date" class="form-control form-control-sm" formControlName="StartDate">
                 </div>
 
                 <div class="col-12">
                     <label for="address2" class="form-label">Конец отпуска</label>
-                    <input type="date" class="form-control" formControlName="EndDate">
+                    <input type="date" class="form-control form-control-sm" formControlName="EndDate">
                 </div>
 
                 <hr class="my-4">
 
-                <button class="w-100 btn btn-lg btn-primary" (click)="this.startVacation()"
+                <button class="w-100 btn btn-sm btn-primary" (click)="this.startVacation()"
                     [disabled]="!this.vacationGroup.valid">Оформить заявку</button>
+
+                <hr class="my-4">
+
             </form>
         </div>
     </div>

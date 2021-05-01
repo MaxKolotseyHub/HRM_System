@@ -271,6 +271,7 @@
     <Compile Include="Controllers\DepartamentsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Helpers\AutomapperConfig.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />

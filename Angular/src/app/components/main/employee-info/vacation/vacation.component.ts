@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { VacationDto } from 'src/app/models/vacation/vacationDto';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-vacation',
@@ -29,7 +30,11 @@ export class VacationComponent implements OnInit {
   startVacation() {
     this.vacation.StartDate = this.vacationGroup.value.StartDate;
     this.vacation.EndDate = this.vacationGroup.value.EndDate;
-    console.log(this.vacation);
-    this.employeeService.startVacation(this.vacation).subscribe(response => console.log(response));
+    this.employeeService.startVacation(this.vacation).pipe(
+      switchMap(v => this.employeeService.getVacation(this.id))
+    ).subscribe(data => {
+      this.vacationGroup.reset();
+      this.vacation = data
+    });
   }
 }

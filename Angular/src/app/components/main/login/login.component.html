@@ -6,21 +6,24 @@
             <br />
 
             <form [formGroup]="loginGroup">
-                <h1 class="h3 mb-3 fw-normal">Вход</h1>
+                <h4 class=" mb-3">Вход</h4>
 
                 <div class="form-floating">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
-                        formControlName="email">
-                    <label for="floatingInput">Email</label>
+                    <div class="row m-4">
+                        <label for="floatingInput" class="col-3">Email</label>
+                        <input type="email" class="form-control form-control-sm col-9" placeholder="name@example.com"
+                            formControlName="email">
+                    </div>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
-                        formControlName="password">
-                    <label for="floatingPassword">Пароль</label>
+                    <div class="row m-4">
+                        <label for="floatingPassword" class="col-3">Пароль</label>
+                        <input type="password" class="form-control form-control-sm col-9" placeholder="Password"
+                            formControlName="password">
+                    </div>
                 </div>
-                <button class="w-100 btn btn-lg btn-primary" (click)="this.login()"
+                <button class="w-75 btn btn-sm btn-primary m-4" (click)="this.login()"
                     [disabled]="!this.loginGroup.valid">войти</button>
-                <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
             </form>
         </main>
         <div class="col-4"></div>
