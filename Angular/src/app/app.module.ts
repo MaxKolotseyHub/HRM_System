@@ -18,6 +18,10 @@ import { CareerComponent } from './components/main/employee-info/career/career.c
 import { VacationComponent } from './components/main/employee-info/vacation/vacation.component';
 import { AnalyticsComponent } from './components/main/analytics/analytics.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
+import { ChartsModule } from 'ng2-charts';
+import { EmplPerDeptComponent } from './components/main/analytics/charts/empl-per-dept/empl-per-dept.component';
+import { EffComponent } from './components/main/analytics/charts/eff/eff.component';
+import { AvgSalComponent } from './components/main/analytics/charts/avg-sal/avg-sal.component';
 
 @NgModule({
   declarations: [
@@ -33,14 +37,18 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     PersonalDetailsComponent,
     CareerComponent,
     VacationComponent,
-    AnalyticsComponent
+    AnalyticsComponent,
+    EmplPerDeptComponent,
+    EffComponent,
+    AvgSalComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     EmplRoutingModule,
-    OAuthModule.forRoot()
+    OAuthModule.forRoot(),
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

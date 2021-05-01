@@ -27,5 +27,6 @@ namespace HRM_System_WebApi.Models.Employee
         [Display(Name ="В отпуске")]
         public bool OnVacation { get; set; }
         public double Efficiency { get; set; }
+        public double Salary { get; set; }
     }
 }

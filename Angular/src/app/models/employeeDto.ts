@@ -8,4 +8,6 @@ export interface EmployeeDto {
     JobTitle: string;
     Fired: boolean;
     OnVacation: boolean;
+    Efficiency: number;
+    Salary: number;
 }
