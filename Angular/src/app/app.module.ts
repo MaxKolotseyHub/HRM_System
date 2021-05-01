@@ -17,6 +17,7 @@ import { PersonalDetailsComponent } from './components/main/employee-info/person
 import { CareerComponent } from './components/main/employee-info/career/career.component';
 import { VacationComponent } from './components/main/employee-info/vacation/vacation.component';
 import { AnalyticsComponent } from './components/main/analytics/analytics.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AnalyticsComponent } from './components/main/analytics/analytics.compon
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
-    EmplRoutingModule
+    EmplRoutingModule,
+    OAuthModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

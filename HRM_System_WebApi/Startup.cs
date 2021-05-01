@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Cors;
 using System.Web.Http;
+using HRM_System_WebApi.Models;
 using HRM_System_WebApi.Modules;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
@@ -38,6 +40,8 @@ namespace HRM_System_WebApi
                 .UseSwaggerUi3()
                 .UseNinject(() => kernel)
                 .UseNinjectWebApi(config);
+
+
         }
 
         private void UseCors(IAppBuilder app)
@@ -63,6 +67,8 @@ namespace HRM_System_WebApi
             };
 
             app.UseCors(corsOptions);
+
+
         }
     }
 }

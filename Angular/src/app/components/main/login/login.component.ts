@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private loginService: LoginService, private router: Router, private fb: FormBuilder) {
     this.loginGroup = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
 
@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginService.LoggedOn$.pipe(filter(_ => _)).subscribe(_ => {
+      this.loginService.getClaims();
       this.router.navigate(['home']);
     });
   }

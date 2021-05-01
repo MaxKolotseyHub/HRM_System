@@ -1,4 +1,4 @@
 export interface UserDto {
-    id: number;
-    fullName: string;
+    access_token: string;
+    userName: string;
 }

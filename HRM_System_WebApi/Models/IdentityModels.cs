@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -27,7 +29,42 @@ namespace HRM_System_WebApi.Models
         
         public static ApplicationDbContext Create()
         {
-            return new ApplicationDbContext();
+            var context = new ApplicationDbContext();
+
+            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var checkUser = userManager.FindByEmail("admin@mail.ru");
+                if (checkUser != null)
+                return context;
+            // создаем две роли
+            var role1 = new IdentityRole { Name = "admin" };
+            var role2 = new IdentityRole { Name = "user" };
+
+            // добавляем роли в бд
+            roleManager.Create(role1);
+            roleManager.Create(role2);
+
+            // создаем пользователей
+            var admin = new ApplicationUser { Email = "admin@mail.ru", UserName = "admin@mail.ru" };
+            var user = new ApplicationUser { Email = "user@mail.ru", UserName = "user@mail.ru" };
+            string password = "Admin1.";
+            var result = userManager.Create(admin, password);
+
+            // если создание пользователя прошло успешно
+            if (result.Succeeded)
+            {
+                // добавляем для пользователя роль
+                userManager.AddToRole(admin.Id, role1.Name);
+                userManager.AddToRole(admin.Id, role2.Name);
+                userManager.AddClaim(admin.Id, new Claim(ClaimTypes.Role, "admin", ClaimValueTypes.String));
+            }
+
+            context.SaveChanges();
+
+            return context;
         }
     }
+
+   
 }

@@ -11,13 +11,14 @@
             </a>
         </li>
         <li>
-            <a routerLink="/departaments" routerLinkActive="active" class="nav-link text-white">
-                Департаменты
-            </a>
-        </li>
-        <li>
             <a routerLink="/analytics" routerLinkActive="active" class="nav-link text-white">
                 Аналитика
+            </a>
+        </li>
+
+        <li *ngIf="showAdminTools">
+            <a routerLink="/admin" routerLinkActive="active" class="nav-link text-white">
+                Администрирование
             </a>
         </li>
     </ul>

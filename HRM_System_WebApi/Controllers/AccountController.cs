@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using HRM_System_WebApi.Models;
 using HRM_System_WebApi.Providers;
 using HRM_System_WebApi.Results;
+using System.Linq;
 
 namespace HRM_System_WebApi.Controllers
 {
@@ -329,7 +330,7 @@ namespace HRM_System_WebApi.Controllers
             }
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-
+            
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
@@ -373,6 +374,7 @@ namespace HRM_System_WebApi.Controllers
             return Ok();
         }
 
+      
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
