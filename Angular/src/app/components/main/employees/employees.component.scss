@@ -6,3 +6,10 @@
     align-content: space-around;
     justify-content: flex-start;
 }
+
+.search-bar{
+    position: sticky;
+    top:60px;
+    z-index: 1;
+    margin: 10px 0px 10px 0px;
+}

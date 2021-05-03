@@ -45,4 +45,8 @@ export class EmployeeService {
   changeEfficiency(id: number, val: number) {
     return this.http.get(`${environment.backendUrl}/api/employees/efficiency?id=${id}&efficiency=${val}`)
   }
+
+  createEmployee(model: string) {
+    return this.http.post(`${environment.backendUrl}/api/employees`, model);
+  }
 }

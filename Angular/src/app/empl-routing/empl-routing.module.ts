@@ -8,10 +8,12 @@ import { NotFoundComponent } from '../components/main/not-found/not-found.compon
 import { EmployeesGuard } from '../employees.guard';
 import { EmployeeInfoComponent } from '../components/main/employee-info/employee-info.component';
 import { AnalyticsComponent } from '../components/main/analytics/analytics.component';
+import { CreateEmployeeComponent } from '../components/main/create-employee/create-employee.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'employees', component: EmployeesComponent, canActivate: [EmployeesGuard] },
+  { path: 'employee', component: CreateEmployeeComponent, canActivate: [EmployeesGuard] },
   { path: 'employees/:id', component: EmployeeInfoComponent, canActivate: [EmployeesGuard] },
   { path: 'analytics', component: AnalyticsComponent, canActivate: [EmployeesGuard] },
   { path: 'login', component: LoginComponent },

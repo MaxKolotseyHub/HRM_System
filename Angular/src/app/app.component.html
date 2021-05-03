@@ -1,13 +1,11 @@
 <div class="row">
     <app-navbar></app-navbar>
 </div>
-<div class="flex">
-    <div class="row">
-        <div class="col-2" *ngIf="this.loggedIn">
-            <app-sidebar></app-sidebar>
-        </div>
-        <div class="col" style="margin-top: 5%;">
-            <router-outlet></router-outlet>
-        </div>
+<div class="row">
+    <div class="col-2" *ngIf="this.loggedIn">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="col pl-5" style="margin-top: 5%; ">
+        <router-outlet></router-outlet>
     </div>
 </div>

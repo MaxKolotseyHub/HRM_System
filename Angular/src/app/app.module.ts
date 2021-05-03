@@ -22,6 +22,7 @@ import { ChartsModule } from 'ng2-charts';
 import { EmplPerDeptComponent } from './components/main/analytics/charts/empl-per-dept/empl-per-dept.component';
 import { EffComponent } from './components/main/analytics/charts/eff/eff.component';
 import { AvgSalComponent } from './components/main/analytics/charts/avg-sal/avg-sal.component';
+import { CreateEmployeeComponent } from './components/main/create-employee/create-employee.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AvgSalComponent } from './components/main/analytics/charts/avg-sal/avg-
     AnalyticsComponent,
     EmplPerDeptComponent,
     EffComponent,
-    AvgSalComponent
+    AvgSalComponent,
+    CreateEmployeeComponent
   ],
   imports: [
     BrowserModule,

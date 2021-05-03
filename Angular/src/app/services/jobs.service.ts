@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { share } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { JobDto } from '../models/jobs/jobDto';
 
@@ -11,6 +12,6 @@ export class JobsService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-    return this.http.get<JobDto[]>(`${environment.backendUrl}/api/jobs`)
+    return this.http.get<JobDto[]>(`${environment.backendUrl}/api/jobs`).pipe(share());
   }
 }
