@@ -10,13 +10,10 @@ namespace HRM_System_WebApi.Models.Jobs
     {
         public int Id { get; set; }
         [Required]
-        [Display(Name="Минимальный оклад")]
         public decimal MinSalary { get; set; }
         [Required]
-        [Display(Name="Максимальный оклад")]
         public decimal MaxSalary { get; set; }
         [Required]
-        [Display(Name="Название")]
         public string Title { get; set; }
     }
 }

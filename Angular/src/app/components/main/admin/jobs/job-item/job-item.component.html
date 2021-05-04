@@ -1,0 +1,7 @@
+<div class="card m-3 card-item">
+    <div class="card-body">
+        <h5 class="card-title">{{job.Title}}</h5>
+        <a [routerLink]="[job.Id]" class="btn btn-primary">Изменить</a>
+        <a (click)="delete()" class="btn btn-outline-danger ml-3">Удалить</a>
+    </div>
+</div>

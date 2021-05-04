@@ -44,7 +44,7 @@ namespace HRM_System_WebApi.Controllers
             return Ok(job);
         }
 
-        [Route("api/jobs"),HttpPost]
+        [Route("api/jobs"), HttpPut]
         public IHttpActionResult Edit(IndexJobViewModel model)
         {
             if (!ModelState.IsValid)
@@ -54,6 +54,18 @@ namespace HRM_System_WebApi.Controllers
                 return BadRequest("Слишком высокий оклад для данной позиции");
 
             _jobService.Update(_mapper.Map<JobBll>(model));
+            return Ok();
+        }
+        [Route("api/jobs"), HttpPost]
+        public IHttpActionResult Add(IndexJobViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            if (model.MinSalary > model.MaxSalary)
+                return BadRequest("Слишком высокий оклад для данной позиции");
+
+            _jobService.Add(_mapper.Map<JobBll>(model));
             return Ok();
         }
     }

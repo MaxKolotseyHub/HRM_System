@@ -10,7 +10,6 @@ namespace HRM_System_WebApi.Models.Departaments
     {
         public int Id { get; set; }
         [Required]
-        [Display(Name ="Название")]
         public string Title { get; set; }
     }
 }

@@ -9,6 +9,12 @@ import { EmployeesGuard } from '../employees.guard';
 import { EmployeeInfoComponent } from '../components/main/employee-info/employee-info.component';
 import { AnalyticsComponent } from '../components/main/analytics/analytics.component';
 import { CreateEmployeeComponent } from '../components/main/create-employee/create-employee.component';
+import { DepartamentsComponent } from '../components/main/admin/departament/departaments/departaments.component';
+import { CreateDepartamentComponent } from '../components/main/admin/departament/create-departament/create-departament.component';
+import { UpdateDepartamentComponent } from '../components/main/admin/departament/update-departament/update-departament.component';
+import { CreateJobComponent } from '../components/main/admin/jobs/create-job/create-job.component';
+import { UpdateJobComponent } from '../components/main/admin/jobs/update-job/update-job.component';
+import { JobsComponent } from '../components/main/admin/jobs/jobs/jobs.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -16,6 +22,12 @@ export const routes: Routes = [
   { path: 'employee', component: CreateEmployeeComponent, canActivate: [EmployeesGuard] },
   { path: 'employees/:id', component: EmployeeInfoComponent, canActivate: [EmployeesGuard] },
   { path: 'analytics', component: AnalyticsComponent, canActivate: [EmployeesGuard] },
+  { path: 'departaments', component: DepartamentsComponent, canActivate: [EmployeesGuard] },
+  { path: 'departaments/:id', component: UpdateDepartamentComponent, canActivate: [EmployeesGuard] },
+  { path: 'departament', component: CreateDepartamentComponent, canActivate: [EmployeesGuard] },
+  { path: 'jobs', component: JobsComponent, canActivate: [EmployeesGuard] },
+  { path: 'jobs/:id', component: UpdateJobComponent, canActivate: [EmployeesGuard] },
+  { path: 'job', component: CreateJobComponent, canActivate: [EmployeesGuard] },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },

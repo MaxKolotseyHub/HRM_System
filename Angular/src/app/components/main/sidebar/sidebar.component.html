@@ -17,8 +17,14 @@
         </li>
 
         <li *ngIf="showAdminTools">
-            <a routerLink="/admin" routerLinkActive="active" class="nav-link text-white">
-                Администрирование
+            <a routerLink="/departaments" routerLinkActive="active" class="nav-link text-white">
+                Департаменты
+            </a>
+        </li>
+
+        <li *ngIf="showAdminTools">
+            <a routerLink="/jobs" routerLinkActive="active" class="nav-link text-white">
+                Должности
             </a>
         </li>
     </ul>

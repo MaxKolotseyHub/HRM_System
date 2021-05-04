@@ -11,7 +11,7 @@ import { EmployeeCardComponent } from './components/main/employee-card/employee-
 import { LoginComponent } from './components/main/login/login.component';
 import { NotFoundComponent } from './components/main/not-found/not-found.component';
 import { EmplRoutingModule } from './empl-routing/empl-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeInfoComponent } from './components/main/employee-info/employee-info.component';
 import { PersonalDetailsComponent } from './components/main/employee-info/personal-details/personal-details.component';
 import { CareerComponent } from './components/main/employee-info/career/career.component';
@@ -23,6 +23,14 @@ import { EmplPerDeptComponent } from './components/main/analytics/charts/empl-pe
 import { EffComponent } from './components/main/analytics/charts/eff/eff.component';
 import { AvgSalComponent } from './components/main/analytics/charts/avg-sal/avg-sal.component';
 import { CreateEmployeeComponent } from './components/main/create-employee/create-employee.component';
+import { DepartamentItemComponent } from './components/main/admin/departament/departament-item/departament-item.component';
+import { DepartamentsComponent } from './components/main/admin/departament/departaments/departaments.component';
+import { CreateDepartamentComponent } from './components/main/admin/departament/create-departament/create-departament.component';
+import { UpdateDepartamentComponent } from './components/main/admin/departament/update-departament/update-departament.component';
+import { CreateJobComponent } from './components/main/admin/jobs/create-job/create-job.component';
+import { JobItemComponent } from './components/main/admin/jobs/job-item/job-item.component';
+import { JobsComponent } from './components/main/admin/jobs/jobs/jobs.component';
+import { UpdateJobComponent } from './components/main/admin/jobs/update-job/update-job.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +50,15 @@ import { CreateEmployeeComponent } from './components/main/create-employee/creat
     EmplPerDeptComponent,
     EffComponent,
     AvgSalComponent,
-    CreateEmployeeComponent
+    CreateEmployeeComponent,
+    DepartamentItemComponent,
+    DepartamentsComponent,
+    CreateDepartamentComponent,
+    UpdateDepartamentComponent,
+    CreateJobComponent,
+    JobItemComponent,
+    JobsComponent,
+    UpdateJobComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +66,8 @@ import { CreateEmployeeComponent } from './components/main/create-employee/creat
     ReactiveFormsModule,
     EmplRoutingModule,
     OAuthModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -44,12 +44,21 @@ namespace HRM_System_WebApi.Controllers
             return Ok(dept);
         }
 
-        [Route("api/departaments/{id}"), HttpPost]
+        [Route("api/departaments"), HttpPut]
         public async Task<IHttpActionResult> Edit(IndexDepartamentViewModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
             await _service.Update(_mapper.Map<DepartamentBll>(model));
+            return Ok();
+        }
+
+        [Route("api/departaments"), HttpPost]
+        public async Task<IHttpActionResult> Add(IndexDepartamentViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+            await _service.Add(_mapper.Map<DepartamentBll>(model));
             return Ok();
         }
     }
