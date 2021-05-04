@@ -15,6 +15,7 @@ import { UpdateDepartamentComponent } from '../components/main/admin/departament
 import { CreateJobComponent } from '../components/main/admin/jobs/create-job/create-job.component';
 import { UpdateJobComponent } from '../components/main/admin/jobs/update-job/update-job.component';
 import { JobsComponent } from '../components/main/admin/jobs/jobs/jobs.component';
+import { AdminGuard } from '../admin.guard';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -22,12 +23,12 @@ export const routes: Routes = [
   { path: 'employee', component: CreateEmployeeComponent, canActivate: [EmployeesGuard] },
   { path: 'employees/:id', component: EmployeeInfoComponent, canActivate: [EmployeesGuard] },
   { path: 'analytics', component: AnalyticsComponent, canActivate: [EmployeesGuard] },
-  { path: 'departaments', component: DepartamentsComponent, canActivate: [EmployeesGuard] },
-  { path: 'departaments/:id', component: UpdateDepartamentComponent, canActivate: [EmployeesGuard] },
-  { path: 'departament', component: CreateDepartamentComponent, canActivate: [EmployeesGuard] },
-  { path: 'jobs', component: JobsComponent, canActivate: [EmployeesGuard] },
-  { path: 'jobs/:id', component: UpdateJobComponent, canActivate: [EmployeesGuard] },
-  { path: 'job', component: CreateJobComponent, canActivate: [EmployeesGuard] },
+  { path: 'departaments', component: DepartamentsComponent, canActivate: [AdminGuard] },
+  { path: 'departaments/:id', component: UpdateDepartamentComponent, canActivate: [AdminGuard] },
+  { path: 'departament', component: CreateDepartamentComponent, canActivate: [AdminGuard] },
+  { path: 'jobs', component: JobsComponent, canActivate: [AdminGuard] },
+  { path: 'jobs/:id', component: UpdateJobComponent, canActivate: [AdminGuard] },
+  { path: 'job', component: CreateJobComponent, canActivate: [AdminGuard] },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
