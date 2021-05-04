@@ -31,6 +31,8 @@ import { CreateJobComponent } from './components/main/admin/jobs/create-job/crea
 import { JobItemComponent } from './components/main/admin/jobs/job-item/job-item.component';
 import { JobsComponent } from './components/main/admin/jobs/jobs/jobs.component';
 import { UpdateJobComponent } from './components/main/admin/jobs/update-job/update-job.component';
+import { FilterPipe } from './filters/filter.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,8 @@ import { UpdateJobComponent } from './components/main/admin/jobs/update-job/upda
     CreateJobComponent,
     JobItemComponent,
     JobsComponent,
-    UpdateJobComponent
+    UpdateJobComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,8 @@ import { UpdateJobComponent } from './components/main/admin/jobs/update-job/upda
     EmplRoutingModule,
     OAuthModule.forRoot(),
     ChartsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

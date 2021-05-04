@@ -1,4 +1,4 @@
-<div class="my-flex">
+<div class="my-flex" *ngIf="true" [@slideInRightOnEnter]>
     <app-departament-item *ngFor="let dep of departaments" [departament]="dep"></app-departament-item>
 </div>
 <div class="my-button" routerLink="/departament">

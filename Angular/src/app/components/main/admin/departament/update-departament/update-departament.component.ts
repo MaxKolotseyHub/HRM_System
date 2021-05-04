@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DepartamentDto } from 'src/app/models/departaments/departamentDto';
 import { DepartamentService } from 'src/app/services/departament.service';
@@ -21,18 +21,20 @@ export class UpdateDepartamentComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.id = params['id'];
-      this.departamentService.getById(+this.id).subscribe(res => this.departament = res);
+      this.departamentService.getById(+this.id).subscribe(res => {
+        this.departament = res;
+        this.depGroup.addControl('Id', new FormControl(this.departament.Id, Validators.required));
+        this.depGroup.addControl('Title', new FormControl(this.departament.Title, Validators.required));
+      });
 
       this.depGroup = this.fb.group({
-        Title: ['', [Validators.required]]
       });
     });
 
   }
 
   update() {
-    this.departament.Title = this.depGroup.value.Title;
-    this.departamentService.update(this.departament).subscribe(_ => this.router.navigate(["departaments"]));
+    this.departamentService.update(this.depGroup.getRawValue()).subscribe(_ => this.router.navigate(["departaments"]));
   }
 
 }

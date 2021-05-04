@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { JobDto } from 'src/app/models/jobs/jobDto';
 import { JobsService } from 'src/app/services/jobs.service';
+import { fadeInOnEnterAnimation, slideInRightOnEnterAnimation } from 'angular-animations';
 
 @Component({
   selector: 'app-jobs',
   templateUrl: './jobs.component.html',
-  styleUrls: ['./jobs.component.scss']
+  styleUrls: ['./jobs.component.scss'],
+  animations: [
+    fadeInOnEnterAnimation(),
+    slideInRightOnEnterAnimation()
+  ]
 })
 export class JobsComponent implements OnInit {
 

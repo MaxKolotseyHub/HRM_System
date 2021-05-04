@@ -13,3 +13,12 @@
 .my-float{
 	margin-top:22px;
 }
+
+.my-flex{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex-grow: 0;
+    align-content: space-around;
+    justify-content: flex-start;
+}

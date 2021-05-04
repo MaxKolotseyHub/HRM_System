@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DepartamentDto } from 'src/app/models/departaments/departamentDto';
 import { JobDto } from 'src/app/models/jobs/jobDto';
 import { DepartamentService } from 'src/app/services/departament.service';
@@ -18,7 +19,13 @@ export class CreateEmployeeComponent implements OnInit {
   jobs: JobDto[] = [];
   loading = false;
 
-  constructor(private departamentsService: DepartamentService, private jobsService: JobsService, private fb: FormBuilder, private employeeService: EmployeeService) { }
+  constructor(
+    private departamentsService: DepartamentService,
+    private jobsService: JobsService,
+    private fb: FormBuilder,
+    private employeeService: EmployeeService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.departamentsService.getAll().subscribe(data => this.departaments = data);
@@ -45,6 +52,6 @@ export class CreateEmployeeComponent implements OnInit {
   createEmployee() {
     console.log(this.emplGroup.getRawValue());
     this.loading = true;
-    this.employeeService.createEmployee(this.emplGroup.getRawValue()).subscribe(res => this.emplGroup.reset, _ => _, () => this.loading = false);
+    this.employeeService.createEmployee(this.emplGroup.getRawValue()).subscribe(res => this.router.navigate(["employees"]), _ => _, () => this.loading = false);
   }
 }

@@ -8,6 +8,7 @@ import { EmployeeDto } from 'src/app/models/employeeDto';
 import { EmployeeInfo } from 'src/app/models/employeeInfo';
 import { DepartamentService } from 'src/app/services/departament.service';
 import { EmployeeService } from 'src/app/services/employee.service';
+import { SidebarService } from 'src/app/services/sidebar.service';
 
 @Component({
   selector: 'app-analytics',
@@ -29,19 +30,21 @@ export class AnalyticsComponent implements OnInit {
   showEmpDep = false;
   showEff = false;
   showSal = false;
+  currentChartTitle = '';
 
-  constructor(private empService: EmployeeService, private deptService: DepartamentService) { }
+  constructor(private empService: EmployeeService, private deptService: DepartamentService, private sidebarService: SidebarService) { }
   ngOnInit(): void {
     this.empService.getEmployees().pipe(switchMap(emps => {
       this.emps = emps;
       return this.deptService.getAll();
     })).subscribe(deps => {
       this.deps = deps;
-      this.parseEmps();
+      this.avgSal();
     });
   }
 
   avgSal() {
+    this.currentChartTitle = 'Средний оклад';
     this.parseSal();
     this.showEff = false;
     this.showEmpDep = false;
@@ -49,6 +52,7 @@ export class AnalyticsComponent implements OnInit {
   }
 
   empDep() {
+    this.currentChartTitle = 'Сотрудники по департаментам';
     this.parseEmps();
 
     this.showEff = false;
@@ -57,6 +61,7 @@ export class AnalyticsComponent implements OnInit {
   }
 
   eff() {
+    this.currentChartTitle = 'Эффективность';
     let data = [];
     let label = 'Эффективность';
 

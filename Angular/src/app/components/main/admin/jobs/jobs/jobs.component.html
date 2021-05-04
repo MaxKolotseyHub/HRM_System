@@ -1,4 +1,4 @@
-<div class="my-flex">
+<div class="my-flex" *ngIf="true" [@slideInRightOnEnter]>
     <app-job-item *ngFor="let job of jobs" [job]="job"></app-job-item>
 </div>
 <div class="my-button" routerLink="/job">

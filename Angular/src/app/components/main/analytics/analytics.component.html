@@ -1,65 +1,31 @@
 <body>
 
     <div class="container-fluid">
-        <div class="row">
-            <nav id="sidebarMenu" class="col-md-4 col-lg-3 d-md-block bg-light sidebar collapse">
-                <div class="position-sticky pt-3">
-                    <ul class="nav flex-column">
-                        <li class="nav-item" (click)="avgSal()">
-                            <a class="nav-link active" aria-current="page">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-bar-chart-2">
-                                    <line x1="18" y1="20" x2="18" y2="10"></line>
-                                    <line x1="12" y1="20" x2="12" y2="4"></line>
-                                    <line x1="6" y1="20" x2="6" y2="14"></line>
-                                </svg>
-                                Средний оклад
-                            </a>
-                        </li>
-                        <li class="nav-item" (click)="eff()">
-                            <a class="nav-link">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-bar-chart-2">
-                                    <line x1="18" y1="20" x2="18" y2="10"></line>
-                                    <line x1="12" y1="20" x2="12" y2="4"></line>
-                                    <line x1="6" y1="20" x2="6" y2="14"></line>
-                                </svg>
-                                Эффективность
-                            </a>
-                        </li>
-                        <li class="nav-item" (click)="empDep()">
-                            <a class="nav-link">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-bar-chart-2">
-                                    <line x1="18" y1="20" x2="18" y2="10"></line>
-                                    <line x1="12" y1="20" x2="12" y2="4"></line>
-                                    <line x1="6" y1="20" x2="6" y2="14"></line>
-                                </svg>
-                                Сотрудники по департаментам
-                            </a>
-                        </li>
+        <div class="">
+            <ul class="my-flex">
+                <li class="nav-link" (click)="avgSal()">
+                    <button class="btn btn-sm btn-outline-primary">
+                        Средний оклад
+                    </button>
+                </li>
+                <li class="nav-link" (click)="eff()">
+                    <button class="btn btn-sm btn-outline-primary">
+                        Эффективность
+                    </button>
+                </li>
+                <li class="nav-link" (click)="empDep()">
+                    <button class="btn btn-sm btn-outline-primary">
 
-                    </ul>
-                </div>
-            </nav>
+                        Сотрудники по департаментам
+                    </button>
+                </li>
+
+            </ul>
 
             <main class="col-md-8 ms-sm-auto col-lg-9 px-md-4">
-                <div class="chartjs-size-monitor">
-                    <div class="chartjs-size-monitor-expand">
-                        <div class=""></div>
-                    </div>
-                    <div class="chartjs-size-monitor-shrink">
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
+                    <h1 class="h2">{{currentChartTitle}}</h1>
+                    <div class="btn-toolbar  mb-md-0">
                     </div>
                 </div>
                 <app-empl-per-dept [doughnutChartLabels]="doughnutChartLabels" [doughnutChartData]="doughnutChartData"
