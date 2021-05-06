@@ -44,9 +44,7 @@ export class LoginService {
         'Authorization': 'Bearer ' + this.user.access_token
       }
     }).subscribe(res => {
-      if (res.find((item) => item.value == 'admin'))
-        this.isAdmin = true;
-      else this.isAdmin = false;
+      this.isAdmin = res.some((item) => item.value == 'admin');
       this.isAdminSubject.next(this.isAdmin);
     });
   }

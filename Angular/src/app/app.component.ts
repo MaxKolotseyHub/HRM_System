@@ -21,5 +21,5 @@ export class AppComponent implements OnInit {
     this.loginService.LoggedOn$.subscribe(loggedIn => this.loggedIn = loggedIn);
   }
 
-  title = 'Angular';
+  title = 'HR Management';
 }

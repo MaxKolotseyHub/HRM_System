@@ -6,26 +6,26 @@
             <br />
 
             <form [formGroup]="loginGroup">
-                <h4 class=" mb-3">Вход</h4>
+                <h4 class=" mb-3">Регистрация</h4>
 
                 <div class="form-floating">
                     <div class="row m-4">
-                        <label for="floatingInput" class="col-3">Email</label>
+                        <label for="floatingInput" class="col-3  form-control-sm">Email</label>
                         <input type="email" class="form-control form-control-sm col-9" placeholder="name@example.com"
                             formControlName="Email">
                     </div>
                 </div>
                 <div class="form-floating">
                     <div class="row m-4">
-                        <label for="floatingPassword" class="col-3">Пароль</label>
-                        <input type="password" class="form-control form-control-sm col-9" placeholder="Password"
+                        <label for="floatingPassword" class="col-3 form-control-sm">Пароль</label>
+                        <input type="password" class="form-control form-control-sm col-9" placeholder="Пароль"
                             formControlName="Password">
                     </div>
                 </div>
                 <div class="form-floating">
                     <div class="row m-4">
-                        <label for="floatingPassword" class="col-3">Повторите пароль</label>
-                        <input type="password" class="form-control form-control-sm col-9" placeholder="ConfirmPassword"
+                        <label for="floatingPassword" class="col-4 form-control-sm">Повторите пароль</label>
+                        <input type="password" class="form-control form-control-sm col-8" placeholder="Повторите пароль"
                             formControlName="ConfirmPassword">
                     </div>
                 </div>
