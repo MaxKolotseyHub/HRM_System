@@ -32,4 +32,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.loginGroup.value.email, this.loginGroup.value.password);
   }
 
+  register() {
+    this.router.navigate(['registration']);
+  }
 }

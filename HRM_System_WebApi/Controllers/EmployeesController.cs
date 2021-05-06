@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -35,7 +36,7 @@ namespace HRM_System_WebApi.Controllers
         }
 
         [Route("api/employees"), HttpGet]
-        public IHttpActionResult Index()
+        public IHttpActionResult Index(bool fired=false)
         {
             var empls = _mapper.Map<IEnumerable<IndexEmployeeViewModel>>(_service.GetAll());
 
@@ -43,15 +44,11 @@ namespace HRM_System_WebApi.Controllers
             {
                 emp.OnVacation = _vacationService.CheckOnVacation(DateTime.Now, emp.Id);
             }
-            bool? fired = null;
-            if (fired.HasValue)
-            {
-                if (fired.Value)
+                if (fired)
                     return Ok(empls.Where(x => x.Fired));
 
-                if (!fired.Value)
+                if (!fired)
                     return Ok(empls.Where(x => !x.Fired));
-            }
             return Ok(empls);
         }
 
@@ -61,7 +58,16 @@ namespace HRM_System_WebApi.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                var sb = new StringBuilder();
+                foreach(var e in ModelState.Values)
+                {
+                    foreach (var item in e.Errors)
+                    {
+
+                        sb.AppendLine(item.ErrorMessage);
+                    }
+                }
+                return BadRequest(sb.ToString());
             }
 
             await _service.Add(_mapper.Map<EmployeeBll>(model), model.DepartamentId, model.JobId, model.HireDate);

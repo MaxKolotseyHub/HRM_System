@@ -1,6 +1,7 @@
 import { InvokeFunctionExpr } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { EmployeesGuard } from 'src/app/employees.guard';
 import { DepartamentDto } from 'src/app/models/departaments/departamentDto';
@@ -22,7 +23,7 @@ export class PersonalDetailsComponent implements OnInit {
   emplGroup: FormGroup;
   empl: EmployeeInfo;
 
-  constructor(private employeeService: EmployeeService, private fb: FormBuilder) {
+  constructor(private employeeService: EmployeeService, private fb: FormBuilder, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -45,5 +46,9 @@ export class PersonalDetailsComponent implements OnInit {
     this.employee.ThirdName = this.emplGroup.value.ThirdName;
     this.employee.Email = this.emplGroup.value.Email;
     this.employeeService.updatePersonalInfo(this.employee).subscribe();
+  }
+
+  fire() {
+    this.employeeService.fire(this.employee.Id).subscribe(_ => this.router.navigate(['employees']));
   }
 }

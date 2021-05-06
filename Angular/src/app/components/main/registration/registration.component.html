@@ -12,19 +12,23 @@
                     <div class="row m-4">
                         <label for="floatingInput" class="col-3">Email</label>
                         <input type="email" class="form-control form-control-sm col-9" placeholder="name@example.com"
-                            formControlName="email">
+                            formControlName="Email">
                     </div>
                 </div>
                 <div class="form-floating">
                     <div class="row m-4">
                         <label for="floatingPassword" class="col-3">Пароль</label>
                         <input type="password" class="form-control form-control-sm col-9" placeholder="Password"
-                            formControlName="password">
+                            formControlName="Password">
                     </div>
                 </div>
-                <button class="w-75 btn btn-sm btn-primary m-4" (click)="this.login()"
-                    [disabled]="!this.loginGroup.valid">войти</button>
-
+                <div class="form-floating">
+                    <div class="row m-4">
+                        <label for="floatingPassword" class="col-3">Повторите пароль</label>
+                        <input type="password" class="form-control form-control-sm col-9" placeholder="ConfirmPassword"
+                            formControlName="ConfirmPassword">
+                    </div>
+                </div>
                 <button class="w-75 btn btn-sm btn-primary m-4" (click)="this.register()">регистрация</button>
             </form>
         </main>

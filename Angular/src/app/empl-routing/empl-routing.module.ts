@@ -16,6 +16,7 @@ import { CreateJobComponent } from '../components/main/admin/jobs/create-job/cre
 import { UpdateJobComponent } from '../components/main/admin/jobs/update-job/update-job.component';
 import { JobsComponent } from '../components/main/admin/jobs/jobs/jobs.component';
 import { AdminGuard } from '../admin.guard';
+import { RegistrationComponent } from '../components/main/registration/registration.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -30,6 +31,7 @@ export const routes: Routes = [
   { path: 'jobs/:id', component: UpdateJobComponent, canActivate: [AdminGuard] },
   { path: 'job', component: CreateJobComponent, canActivate: [AdminGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'registration', component: RegistrationComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ];

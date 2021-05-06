@@ -29,13 +29,7 @@ export class EmployeeService {
   }
 
   startVacation(model: VacationDto) {
-    return this.http.post<VacationDto>(`${environment.backendUrl}/api/employees/vacation`, model, {
-      headers: {
-        'Accept': '*/*',
-        'Accept-Language': 'ru-BY,ru;q=0.9,en-GB;q=0.8,en;q=0.7,ru-RU;q=0.6,en-US;q=0.5',
-        'Content-Type': 'application/json'
-      }
-    })
+    return this.http.post<VacationDto>(`${environment.backendUrl}/api/employees/vacation`, model)
   }
 
   changeJobInfo(model: EmployeeInfoDto) {
@@ -48,5 +42,9 @@ export class EmployeeService {
 
   createEmployee(model: string) {
     return this.http.post(`${environment.backendUrl}/api/employees`, model);
+  }
+
+  fire(id: number) {
+    return this.http.get(`${environment.backendUrl}/api/employees/fire/${id}`)
   }
 }

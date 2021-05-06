@@ -59,4 +59,8 @@ export class LoginService {
   get LoggedOn() {
     return this.loggedOnSubject.value;
   }
+
+  register(model: string) {
+    return this.http.post(`${environment.backendUrl}/api/Account/Register`, model);
+  }
 }

@@ -33,6 +33,7 @@ import { JobsComponent } from './components/main/admin/jobs/jobs/jobs.component'
 import { UpdateJobComponent } from './components/main/admin/jobs/update-job/update-job.component';
 import { FilterPipe } from './filters/filter.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegistrationComponent } from './components/main/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     JobItemComponent,
     JobsComponent,
     UpdateJobComponent,
-    FilterPipe
+    FilterPipe,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
