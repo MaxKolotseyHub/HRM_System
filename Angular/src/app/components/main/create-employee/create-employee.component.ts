@@ -50,7 +50,6 @@ export class CreateEmployeeComponent implements OnInit {
   }
 
   createEmployee() {
-    console.log(this.emplGroup.getRawValue());
     this.loading = true;
     this.employeeService.createEmployee(this.emplGroup.getRawValue()).subscribe(res => this.router.navigate(["employees"]), _ => this.loading = false, () => this.loading = false);
   }

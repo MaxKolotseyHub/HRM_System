@@ -11,10 +11,10 @@ import { UserDto } from '../models/userDto';
 })
 export class LoginService {
 
-  private loggedOnSubject = new BehaviorSubject<boolean>(true);
-  private isAdminSubject = new BehaviorSubject<boolean>(true);
+  private loggedOnSubject = new BehaviorSubject<boolean>(false);
+  private isAdminSubject = new BehaviorSubject<boolean>(false);
   private user: UserDto;
-  isAdmin: boolean;
+  isAdmin = false;
   constructor(private http: HttpClient) { }
 
   get LoggedOn$() {
@@ -32,7 +32,6 @@ export class LoginService {
       "&password=" + encodeURIComponent(password) +
       "&grant_type=password",
       { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).subscribe(res => {
-        console.log(res);
         this.user = res;
         this.loggedOnSubject.next(true)
       });

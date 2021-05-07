@@ -22,10 +22,11 @@
                             formControlName="password">
                     </div>
                 </div>
-                <button class="w-75 btn btn-sm btn-primary m-4" (click)="this.login()"
+                <button class="w-75 btn btn-sm btn-primary m-4" (click)=" this.login()"
                     [disabled]="!this.loginGroup.valid">войти</button>
 
-                <button class="w-75 btn btn-sm btn-primary m-4" (click)="this.register()">регистрация</button>
+                <button class="w-75 btn btn-sm btn-primary ml-4 mr-4 mb-4"
+                    (click)="this.register()">регистрация</button>
             </form>
         </main>
         <div class="col-4"></div>

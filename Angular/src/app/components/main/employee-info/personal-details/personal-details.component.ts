@@ -27,8 +27,6 @@ export class PersonalDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.employee);
-
     this.emplGroup = this.fb.group({
       FirstName: [this.employee.FirstName, [Validators.required]],
       SecondName: [this.employee.SecondName, [Validators.required]],

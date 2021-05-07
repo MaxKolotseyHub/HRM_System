@@ -20,11 +20,8 @@ export class FilterPipe implements PipeTransform {
             return items;
         }
         search = search.toLocaleLowerCase();
-        console.log(search);
 
         return items.filter(it => {
-            console.log(it.FullName + ' ' + search);
-
             return it.FullName.toLowerCase().includes(search);
         });
     }
