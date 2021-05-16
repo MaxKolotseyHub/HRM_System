@@ -29,7 +29,7 @@ export class EmployeeService {
   }
 
   startVacation(model: VacationDto) {
-    return this.http.post<VacationDto>(`${environment.backendUrl}/api/employees/vacation`, model)
+    return this.http.post(`${environment.backendUrl}/api/employees/vacation`, model)
   }
 
   changeJobInfo(model: EmployeeInfoDto) {

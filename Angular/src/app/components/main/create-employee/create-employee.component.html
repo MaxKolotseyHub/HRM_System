@@ -35,6 +35,8 @@
                 <div class="col-8">
                     <label for="address" class="form-label">Номер телефона</label>
                     <input type="text" class="form-control form-control-sm" formControlName="PhoneNumber">
+                    <small *ngIf="emplGroup.get('PhoneNumber').errors?.noMatch" class="text-danger">Формат телефона:
+                        +375ХХХХХХХХХ</small>
                 </div>
 
                 <div class="col-8">

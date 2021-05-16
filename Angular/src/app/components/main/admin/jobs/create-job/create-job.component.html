@@ -18,8 +18,11 @@
                 <div class="row">
                     <label for="Title" class="form-label">Максимальный оклад</label>
                     <input type="number" class="form-control form-control-sm" formControlName="MaxSalary">
+                    <small *ngIf="jobGroup.errors?.misMatch" class="text-danger">Максимальный оклад
+                        должен превышать минимальный</small>
                 </div>
-                <button class="row mt-3 btn btn-primary btn-sm" (click)="create()">Сохранить
+                <button class="row mt-3 btn btn-primary btn-sm" (click)="create()"
+                    [disabled]="jobGroup.invalid">Сохранить
                     изменения</button>
             </form>
         </div>

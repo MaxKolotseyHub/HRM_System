@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { passwordLengthValidator, passwordValidator } from 'src/app/validators/registration.validator';
 
 @Component({
   selector: 'app-registration',
@@ -14,10 +15,10 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private loginService: LoginService, private router: Router, private fb: FormBuilder) {
     this.loginGroup = this.fb.group({
-      Email: ['', [Validators.required]],
-      Password: ['', [Validators.required]],
+      Email: ['', [Validators.required, Validators.email]],
+      Password: ['', [Validators.required, Validators.minLength(6)]],
       ConfirmPassword: ['', [Validators.required]]
-    });
+    }, { validators: passwordValidator });
 
   }
   ngOnInit(): void {

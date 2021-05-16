@@ -20,6 +20,11 @@
                         <label for="floatingPassword" class="col-3 form-control-sm">Пароль</label>
                         <input type="password" class="form-control form-control-sm col-9" placeholder="Пароль"
                             formControlName="Password">
+
+                        <small *ngIf="loginGroup.get('Password').errors?.minlength" class="text-danger">Пароль должен
+                            содержать минимум
+                            6 символов: 1 заглавную букву, 1 цифру, 1 знак препинания</small>
+
                     </div>
                 </div>
                 <div class="form-floating">
@@ -27,9 +32,11 @@
                         <label for="floatingPassword" class="col-4 form-control-sm">Повторите пароль</label>
                         <input type="password" class="form-control form-control-sm col-8" placeholder="Повторите пароль"
                             formControlName="ConfirmPassword">
+                        <small *ngIf="loginGroup.errors?.misMatch" class="text-danger">Пароли не совпадают</small>
                     </div>
                 </div>
-                <button class="w-75 btn btn-sm btn-primary m-4" (click)="this.register()">регистрация</button>
+                <button class="w-75 btn btn-sm btn-primary m-4" [disabled]="loginGroup.invalid"
+                    (click)="this.register()">регистрация</button>
             </form>
         </main>
         <div class="col-4"></div>

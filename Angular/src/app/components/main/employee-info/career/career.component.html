@@ -52,6 +52,8 @@
                         <div class="col-6">
                             <input type="number" class="form-control-sm" formControlName="Salary">
                         </div>
+                        <small *ngIf="jobGroup.errors?.maxSalaryError" class="text-danger">Оклад должен быть в указанном
+                            для должности диапазоне</small>
                     </div>
                 </form>
                 <br />

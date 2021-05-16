@@ -6,6 +6,8 @@ import { JobDto } from 'src/app/models/jobs/jobDto';
 import { DepartamentService } from 'src/app/services/departament.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { JobsService } from 'src/app/services/jobs.service';
+import { phoneValidator } from 'src/app/validators/phone.validator';
+import { passwordValidator } from 'src/app/validators/registration.validator';
 
 @Component({
   selector: 'app-create-employee',
@@ -25,28 +27,27 @@ export class CreateEmployeeComponent implements OnInit {
     private fb: FormBuilder,
     private employeeService: EmployeeService,
     private router: Router
-  ) { }
+  ) {
+    this.emplGroup = this.fb.group({
+      FirstName: ['', [Validators.required]],
+      SecondName: ['', [Validators.required]],
+      ThirdName: ['', [Validators.required]],
+      Email: ['', [Validators.required, Validators.email]],
+      PhoneNumber: ['', [Validators.required, phoneValidator]],
+      Birthday: ['', [Validators.required]],
+      HireDate: ['', [Validators.required]],
+      Efficiency: [100, [Validators.required, Validators.min(0)]],
+      DepartamentId: ['', [Validators.required]],
+      JobId: ['', [Validators.required]],
+      Salary: ['', [Validators.required, Validators.min(0)]]
+    });
+  }
 
   ngOnInit(): void {
     this.departamentsService.getAll().subscribe(data => this.departaments = data);
     this.jobsService.getAll().subscribe(data => {
       this.jobs = data;
     });
-
-    this.emplGroup = this.fb.group({
-      FirstName: ['', [Validators.required]],
-      SecondName: ['', [Validators.required]],
-      ThirdName: ['', [Validators.required]],
-      Email: ['', [Validators.required, Validators.email]],
-      PhoneNumber: ['', [Validators.required]],
-      Birthday: ['', [Validators.required]],
-      HireDate: ['', [Validators.required]],
-      Efficiency: [100, [Validators.required]],
-      DepartamentId: ['', [Validators.required]],
-      JobId: ['', [Validators.required]],
-      Salary: ['', [Validators.required]]
-    });
-
   }
 
   createEmployee() {

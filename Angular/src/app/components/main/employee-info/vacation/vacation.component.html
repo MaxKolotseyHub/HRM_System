@@ -22,14 +22,21 @@
 
                 <div class="col-12">
                     <label for="address2" class="form-label">Начало отпуска</label>
-                    <input type="date" class="form-control form-control-sm" formControlName="StartDate">
+                    <input type="date" useValueAsDate class="form-control form-control-sm" formControlName="StartDate">
                 </div>
 
                 <div class="col-12">
                     <label for="address2" class="form-label">Конец отпуска</label>
-                    <input type="date" class="form-control form-control-sm" formControlName="EndDate">
+                    <input type="date" useValueAsDate class="form-control form-control-sm" formControlName="EndDate">
                 </div>
 
+                <p><small *ngIf="vacationGroup.get('StartDate').errors?.wrongStartDate" class="text-danger">Дата начала
+                        отпуска не может быть меньше сегодняшнего дня</small></p>
+                <p> <small *ngIf="vacationGroup.errors?.vacationError" class="text-danger">Количество дней отпуска
+                        превышает
+                        лимит</small></p>
+                <p> <small *ngIf="vacationGroup.errors?.wrongDatesOrder" class="text-danger">Неверный порядок
+                        дат</small></p>
                 <hr class="my-4">
 
                 <button class="w-100 btn btn-sm btn-primary" (click)="this.startVacation()"

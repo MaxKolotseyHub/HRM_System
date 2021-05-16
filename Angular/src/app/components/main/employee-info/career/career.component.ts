@@ -7,6 +7,7 @@ import { JobDto } from 'src/app/models/jobs/jobDto';
 import { DepartamentService } from 'src/app/services/departament.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { JobsService } from 'src/app/services/jobs.service';
+import { newSalaryValidator } from 'src/app/validators/registration.validator';
 
 @Component({
   selector: 'app-career',
@@ -35,6 +36,9 @@ export class CareerComponent implements OnInit {
     this.departamentsService.getAll().subscribe(data => this.departaments = data);
     this.jobsService.getAll().subscribe(data => {
       this.jobs = data;
+      this.jobGroup.setValidators(newSalaryValidator(this.jobs));
+      this.jobGroup.updateValueAndValidity();
+      // this.jobGroup.reset();
     });
 
     this.jobGroup = this.fb.group({
