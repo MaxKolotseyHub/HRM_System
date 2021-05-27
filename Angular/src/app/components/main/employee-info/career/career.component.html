@@ -1,7 +1,7 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-md-7 col-lg-8">
+        <div class="col-md-7 col-lg-8" *ngIf="showCareerView">
             <div class="ml-4">
                 <h4>Карьера</h4>
             </div>
@@ -66,7 +66,7 @@
             </div>
         </div>
 
-        <div class="col-md-5 col-lg-4 jumbotron h-auto">
+        <div class="col-md-5 col-lg-4 jumbotron h-auto" *ngIf="showCareerView">
 
             <div class="col-12">
                 <label for="address2" class="form-label font-weight-bold">Эффективность работы:
@@ -87,6 +87,42 @@
 
             <label for="address2" class="form-label font-weight-bold">Годовая премия: {{yearBonus}}</label>
 
+            <button class="btn btn-sm btn-primary" (click)="changeEfficiencyView()">Подробнее</button>
+        </div>
+    </div>
+    <div class="col-md-10 col-lg-10" *ngIf="!showCareerView">
+        <div class="container">
+            <div class="row mb-1 w-100">
+                <a class="nav-link col-2" (click)="changeEfficiencyView()">Назад</a>
+                <span class="ml-1 col-8">История эффективности сотрудника</span>
+            </div>
+            <br />
+            <div class="">
+                <table class="table w-100">
+                    <thead>
+                        <tr>
+                            <th scope="col">Год</th>
+                            <th scope="col">Эффективность</th>
+                            <th scope="col">Оклад</th>
+                            <th scope="col">Годовая премия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>01.01.2019-31.12.2019</td>
+                            <td>100%</td>
+                            <td>600</td>
+                            <td>2160</td>
+                        </tr>
+                        <tr>
+                            <td>01.01.2020-01.01.2021</td>
+                            <td>120%</td>
+                            <td>800</td>
+                            <td>3456</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

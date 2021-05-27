@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { count, switchMap } from 'rxjs/operators';
@@ -23,6 +24,7 @@ export class CareerComponent implements OnInit {
   originalEmployee: EmployeeInfoDto;
   departaments: DepartamentDto[] = [];
   jobs: JobDto[] = [];
+  showCareerView = true;
 
   jobGroup: FormGroup;
   efficiencyGroup: FormGroup;
@@ -86,4 +88,7 @@ export class CareerComponent implements OnInit {
     this.yearBonus = this.employee.Efficiency * 12 * 0.3 * this.employee.Salary / 100;
   }
 
+  changeEfficiencyView() {
+    this.showCareerView = !this.showCareerView;
+  }
 }
